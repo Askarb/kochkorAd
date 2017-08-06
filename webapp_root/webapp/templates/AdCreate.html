@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Жарнама т&#1199;з&#1199;&#1199;{% endblock %}
+{% block content %}
+    <h1>Жарнама т&#1199;з&#1199;&#1199;</h1>
+    <form action="" method="POST">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title:</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label for="title">Жарнама: </label>
+            {{ form.text }}
+        </div>
+        <div class="form-group">
+            <label for="title">Телефон 1:</label>
+            {{ form.phone1 }}
+        </div>
+        <div class="form-group">
+            <label for="title">Телефон 2:</label>
+            {{ form.phone2 }}
+        </div>
+        <input class="btn-create" type="submit" value="Т&#1199;з&#1199;&#1199;">
+    </form>
+{% endblock %}

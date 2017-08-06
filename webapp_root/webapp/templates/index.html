@@ -1,43 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Кочкор Реклама+{% endblock %}
 {% block content %}
-    <div class="slidet">
-        <h3>Slider</h3>
-    </div>
-
-    <div class="content-wrap">
-        <div class="sidebar">
-            <h2 class="category">
-                Категории
-            </h2>
-            <div class="">
-                <nav class="nav-sidebar">
-                    <ul class="nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </nav>
+    <h1>{{ title }}</h1>
+    <div class="items">
+        {% for item in items %}
+            <div class="item">
+                <h2><a href="{% url 'webapp:ad' item.slug %}">{{ item.title }}</a></h2>
+                <p class="text">{{ item.text|safe|truncatechars:120  }}</p>
+                <p>Date created: <b>{{ item.date_create }}</b></p>
+                <span class="category">Категория: <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a></span>
             </div>
-        </div>
-        <div class="content">
-            <h1>Акыркы жарнамалар</h1>
-            <div class="items">
-                <div class="item">
-                    <h2><a href="#">Title sakjdn lkasmd lkmasd klm</a></h2>
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, similique?</p>
-                    <span class="category">Категория: <a href="#">Category</a></span>
-                </div>
-                {% for item in items %}
-                    <div class="item">
-                        <h2><a href="#">{{ item.title }}</a></h2>
-                        <p class="text">{{ item.text|safe }}</p>
-                        <span class="category">Категория: <a href="#"> <b>{{ item.category }}</b></a></span>
-                    </div>
-                {% endfor %}
-            </div>
-
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Ad
+from .models import Category, Ad, Application
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -12,5 +12,10 @@ class AdAdmin(admin.ModelAdmin):
     list_filter = ['active']
     prepopulated_fields = {"slug": ("title",)}
 
+
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ['title', 'checked', 'published']
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Ad, AdAdmin)
+admin.site.register(Application, ApplicationAdmin)

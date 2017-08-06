@@ -22,3 +22,11 @@ class Ad(models.Model):
     active = models.BooleanField(default=True)
 
 
+class Application(models.Model):
+    title = models.CharField(max_length=150, blank=True)
+    text = RichTextField(verbose_name='Text', blank=True)
+    phone1 = models.CharField(max_length=20, blank=True)
+    phone2 = models.CharField(max_length=20, blank=True)
+    checked = models.BooleanField(default=False)
+    published = models.BooleanField(default=False)
+

@@ -1,0 +1,20 @@
+
+{% load appearance %}
+<div class="sidebar">
+    <h2 class="category">
+        Категории
+    </h2>
+    <div class="">
+        <nav class="nav-sidebar">
+            <ul class="nav">
+                    <li><a href="/"><b>Башкы баракча</b></a>
+                    </li>
+                {% for i in categories %}
+                    <li class="{% highlight_if_active 'webapp:category' i.slug %}">
+                        <a href="{% url 'webapp:category' i.slug %}">{{ i.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>

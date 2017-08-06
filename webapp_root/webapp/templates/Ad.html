@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}item.title{% endblock %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div class="items">
+        <div class="item">
+            <h2><a href="#">{{ item.title }}</a></h2>
+            <p class="text">{{ item.text|safe  }}</p>
+            <p>
+                {% if item.phone1 %}
+                    <span>{{ item.phone1 }}</span>
+                {% endif %}
+                {% if item.phone2 %}
+                    <span> : {{ item.phone2 }}</span>
+                {% endif %}
+            </p>
+            <p>Date created: <b>{{ item.date_create }}</b></p>
+            <span class="category">Категория:
+                <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a>
+            </span>
+        </div>
+    </div>
+{% endblock %}
