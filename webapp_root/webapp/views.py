@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, FormView
 from .forms import CreateAdForm
 from django.core.urlresolvers import reverse_lazy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 
 
 class IndexView(TemplateView):
@@ -58,7 +59,7 @@ class CategoryView(TemplateView):
     def get_ads_by_category(self):
         paginator = Paginator(Ad.objects.all().filter(
             category=Category.objects.all().filter(slug=self.get_category_from_url())
-        ).order_by('-date_update'), 2)
+        ).order_by('-date_update'), 5)
         page = self.request.GET.get('page')
         try:
             ads = paginator.page(page)
@@ -80,6 +81,7 @@ class CreationAdView(FormView):
         return context
 
     def form_valid(self, form):
+        self.alert_to_email(form)
         Application.objects.create(
             title=form.cleaned_data['title'],
             text=form.cleaned_data['text'],
@@ -87,6 +89,15 @@ class CreationAdView(FormView):
             phone2=form.cleaned_data['phone2']
         )
         return super().form_valid(form)
+
+    def alert_to_email(self, form):
+        send_mail(
+            'Kochkor ad: '+form.cleaned_data['title'],
+            form.cleaned_data['text'],
+            'kochkorjarnama@gmail.com',
+            ['bolotbekov06@gmail.com'],
+            fail_silently=False,
+        )
 
 
 class ThankView(TemplateView):
