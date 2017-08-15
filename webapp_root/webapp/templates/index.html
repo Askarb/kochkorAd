@@ -11,5 +11,20 @@
                 <span class="category">Категория: <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a></span>
             </div>
         {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if items.has_previous %}
+                    <a href="?page={{ items.previous_page_number }}">мурунку баракчага отуу</a>
+                {% endif %}
+
+                <span class="current">
+                     <b>{{ items.paginator.num_pages }}</b> баракчанын <b>{{ items.number }}</b> баракчасы.
+                </span>
+
+                {% if items.has_next %}
+                    <a href="?page={{ items.next_page_number }}">кийинки баракча отуу</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
 {% endblock %}

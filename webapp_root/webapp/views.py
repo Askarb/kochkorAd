@@ -2,16 +2,29 @@ from .models import Ad, Category, Application
 from django.views.generic import TemplateView, FormView
 from .forms import CreateAdForm
 from django.core.urlresolvers import reverse_lazy
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 class IndexView(TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['items'] = Ad.objects.all().filter(active=True).order_by('-date_update')
+        context['items'] = self.get_last_ads()
         context['categories'] = Category.objects.all()
         context['title'] = 'Акыркы жарнамалар!'
         return context
+
+    def get_last_ads(self):
+        paginator = Paginator(Ad.objects.all().filter(active=True).order_by('-date_update'), 5)
+        page = self.request.GET.get('page')
+        try:
+            ads = paginator.page(page)
+        except PageNotAnInteger:
+            ads = paginator.page(1)
+        except EmptyPage:
+            ads = paginator.page(paginator.num_pages)
+        return ads
 
 
 class AdView(TemplateView):
@@ -34,15 +47,26 @@ class CategoryView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
-        context['items'] = Ad.objects.all().filter(
-            category=Category.objects.all().filter(slug=self.get_category_from_url())
-        ).order_by('-date_update')
+        context['items'] = self.get_ads_by_category()
         context['title'] = 'Категория боюнча жарнамалар!'
         return context
 
     def get_category_from_url(self):
         if 'category' in self.kwargs:
             return self.kwargs['category']
+
+    def get_ads_by_category(self):
+        paginator = Paginator(Ad.objects.all().filter(
+            category=Category.objects.all().filter(slug=self.get_category_from_url())
+        ).order_by('-date_update'), 2)
+        page = self.request.GET.get('page')
+        try:
+            ads = paginator.page(page)
+        except PageNotAnInteger:
+            ads = paginator.page(1)
+        except EmptyPage:
+            ads = paginator.page(paginator.num_pages)
+        return ads
 
 
 class CreationAdView(FormView):
@@ -56,7 +80,6 @@ class CreationAdView(FormView):
         return context
 
     def form_valid(self, form):
-        print(form.cleaned_data['title'], form.cleaned_data['text'])
         Application.objects.create(
             title=form.cleaned_data['title'],
             text=form.cleaned_data['text'],
