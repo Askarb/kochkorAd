@@ -1,5 +1,31 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+
 {% block title %}Кочкор Реклама+{% endblock %}
+
+{% block js %}
+    <script src="{% static "js/slick.min.js" %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('.slider').slick({
+              dots: true,
+              speed: 500,
+              autoplay: true,
+              autoplaySpeed: 3000
+          });
+        });
+    </script>
+{% endblock %}
+
+{% block slider %}
+    <div class="container">
+        <div class="slider">
+            <div><img src="{% static 'img/1.jpg' %}" alt=""></div>
+            <div><img src="{% static 'img/2.jpg' %}" alt=""></div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
     <h1>{{ title }}</h1>
     <div class="items">

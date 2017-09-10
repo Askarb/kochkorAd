@@ -1,0 +1,15 @@
+{% load appearance %}
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <nav class="menu">
+        <ul>
+            <li class="{% highlight_if_active 'webapp:index' %}">
+                <a href="{% url 'webapp:index' %}">Башкы баракча</a>
+            </li>
+            <li class="{% highlight_if_active 'webapp:adCreate' %}">
+                <a href="{% url 'webapp:adCreate' %}" class="create">Жарнама
+                    т<span class="character">ү</span>з<span class="character">үү</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

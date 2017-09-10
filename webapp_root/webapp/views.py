@@ -1,4 +1,7 @@
-from .models import Ad, Category, Application
+from time import time
+from datetime import datetime
+from slugify import slugify, CYRILLIC
+from .models import Ad, Category
 from django.views.generic import TemplateView, FormView
 from .forms import CreateAdForm
 from django.core.urlresolvers import reverse_lazy
@@ -81,12 +84,16 @@ class CreationAdView(FormView):
         return context
 
     def form_valid(self, form):
-        self.alert_to_email(form)
-        Application.objects.create(
+        Ad.objects.create(
             title=form.cleaned_data['title'],
+            slug=self.get_slug_link(form.cleaned_data['title']),
             text=form.cleaned_data['text'],
+            category=form.cleaned_data['category'],
+            date_create=datetime.now(),
+            date_update=datetime.utcnow(),
             phone1=form.cleaned_data['phone1'],
-            phone2=form.cleaned_data['phone2']
+            phone2=form.cleaned_data['phone2'],
+            active=False
         )
         return super().form_valid(form)
 
@@ -98,6 +105,9 @@ class CreationAdView(FormView):
             ['bolotbekov06@gmail.com'],
             fail_silently=False,
         )
+
+    def get_slug_link(self, title):
+        return slugify((title + '-' + str(int(round(time()*1000)))), pretranslate=CYRILLIC)
 
 
 class ThankView(TemplateView):

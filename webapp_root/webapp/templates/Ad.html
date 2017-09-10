@@ -1,16 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}item.title{% endblock %}
+{% load static %}
+{% block title %}{{ item.title }}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/ad.css' %}">
+{% endblock %}
 {% block content %}
     <h1>{{ title }}</h1>
     <div class="items">
         <div class="item">
+            {% if item.image %}
+                <div class="image-wrap">
+                    <img src="{{ item.image.url }}" alt="">
+                </div>
+            {% endif %}
             <h2><a href="#">{{ item.title }}</a></h2>
             <p class="text">{{ item.text|safe  }}</p>
             <p>Телефон:
                 {% if item.phone1 %}
                     <span>{{ item.phone1 }}</span>
                 {% endif %}
-                {% if item.phone2 %}
+                {% if item.phone2 %}111
                     <span> ; {{ item.phone2 }}</span>
                 {% endif %}
             </p>

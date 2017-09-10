@@ -1,5 +1,4 @@
 from django.db import models
-from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -12,21 +11,13 @@ class Category(models.Model):
 
 class Ad(models.Model):
     title = models.CharField(max_length=150)
-    slug = models.SlugField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=False, null=False)
     category = models.ForeignKey(Category)
-    text = RichTextField(verbose_name='Text')
+    text = models.TextField(verbose_name='Text')
     date_create = models.DateTimeField()
     date_update = models.DateTimeField()
     phone1 = models.CharField(max_length=20)
     phone2 = models.CharField(max_length=20, blank=True)
     active = models.BooleanField(default=True)
-
-
-class Application(models.Model):
-    title = models.CharField(max_length=150, blank=True)
-    text = RichTextField(verbose_name='Text', blank=True)
-    phone1 = models.CharField(max_length=20, blank=True, null=True)
-    phone2 = models.CharField(max_length=20, blank=True, null=True)
-    checked = models.BooleanField(default=False)
-    published = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='ad', default='', blank=True, null=True)
 

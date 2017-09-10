@@ -1,3 +1,4 @@
+
 from django.conf.urls import url
 from .views import IndexView, CategoryView, AdView, CreationAdView, ThankView
 
@@ -8,3 +9,4 @@ urlpatterns = [
     url(r'^adcreate/$', CreationAdView.as_view(), name='adCreate'),
     url(r'^success/$', ThankView.as_view(), name='thank'),
 ]
+

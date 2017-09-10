@@ -1,0 +1,13 @@
+.image-wrap{
+    max-width: 50%;
+    display: inline-block;
+}
+.image-wrap img{
+    width: 100%;
+    height:auto;
+}
+
+.item h2, .item .text{
+    display: inline-block;
+    vertical-align: top;
+}
