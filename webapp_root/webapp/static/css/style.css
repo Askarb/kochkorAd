@@ -132,14 +132,14 @@ header{
     margin-bottom: 15px;
 }
 .item h2 a{
-    color: #0E2231;
+    color: #00B0E8;
     text-decoration: none;
 }
 .item h2 a:hover{
     color: #217;
 }
 .item a:visited{
-    color: #1d1f21;
+    color: #00B0E8;
 }
 .item .text{
     font-size:20px;
