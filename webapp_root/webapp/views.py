@@ -7,6 +7,7 @@ from .forms import CreateAdForm
 from django.core.urlresolvers import reverse_lazy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
+import telepot
 
 
 class IndexView(TemplateView):
@@ -95,7 +96,14 @@ class CreationAdView(FormView):
             phone2=form.cleaned_data['phone2'],
             active=False
         )
+        self.send_notification_to_telegram(form)
         return super().form_valid(form)
+
+    def send_notification_to_telegram(self, form):
+        token = '462585305:AAHk_kLP2kZhpAIA47iKldJuS4sOeJpcYIk'
+        TelegramBot = telepot.Bot(token)
+        TelegramBot.sendMessage(chat_id='@kochkor', text='Title - {0}\r\nText - {1}'.format(form.cleaned_data['title'],
+                                                                         form.cleaned_data['text']))
 
     def alert_to_email(self, form):
         send_mail(
