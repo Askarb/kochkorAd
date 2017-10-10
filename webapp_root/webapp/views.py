@@ -63,7 +63,7 @@ class CategoryView(TemplateView):
     def get_ads_by_category(self):
         paginator = Paginator(Ad.objects.all().filter(
             category=Category.objects.all().filter(slug=self.get_category_from_url())
-        ).order_by('-date_update'), 5)
+        ).filter(active=True).order_by('-date_update'), 5)
         page = self.request.GET.get('page')
         try:
             ads = paginator.page(page)
