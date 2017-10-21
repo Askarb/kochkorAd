@@ -1,5 +1,4 @@
 from time import time
-from datetime import datetime
 from slugify import slugify, CYRILLIC
 from .models import Ad, Category
 from django.views.generic import TemplateView, FormView
@@ -8,6 +7,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
 import telepot
+from django.utils import timezone
 
 
 class IndexView(TemplateView):
@@ -85,18 +85,20 @@ class CreationAdView(FormView):
         return context
 
     def form_valid(self, form):
-        Ad.objects.create(
+        ad = Ad.objects.create(
             title=form.cleaned_data['title'],
             slug=self.get_slug_link(form.cleaned_data['title']),
             text=form.cleaned_data['text'],
             category=form.cleaned_data['category'],
-            date_create=datetime.now(),
-            date_update=datetime.utcnow(),
+            date_create=timezone.now(),
+            date_update=timezone.now(),
             phone1=form.cleaned_data['phone1'],
             phone2=form.cleaned_data['phone2'],
             active=False
         )
-        self.send_notification_to_telegram(form)
+        print(ad.pk)
+        print(form.cleaned_data)
+        # self.send_notification_to_telegram(form)
         return super().form_valid(form)
 
     def send_notification_to_telegram(self, form):

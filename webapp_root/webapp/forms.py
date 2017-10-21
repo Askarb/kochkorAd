@@ -11,3 +11,4 @@ class CreateAdForm(forms.Form):
     phone1 = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     phone2 = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
 
+

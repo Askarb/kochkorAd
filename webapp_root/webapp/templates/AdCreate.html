@@ -2,26 +2,40 @@
 {% block title %}Жарнама т&#1199;з&#1199;&#1199;{% endblock %}
 {% block content %}
     <h1>Жарнама т&#1199;з&#1199;&#1199;</h1>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
         <div class="form-group">
-            <label for="title">Кириш<span class="character">үү</span>:</label>
+            <label for="title">Кириш<span class="character">үү</span>:
+                <span class="error">{{ form.title.errors }}</span>
+            </label>
             {{ form.title }}
         </div>
         <div class="form-group">
-            <label for="title">Жарнама: </label>
+            <label for="images">C<span class="character">ү</span>рот:</label>
+            <input name="images" type="file" multiple>
+        </div>
+        <div class="form-group">
+            <label for="text">Жарнама:
+                <span class="error">{{ form.text.errors }}</span>
+            </label>
             {{ form.text }}
         </div>
         <div class="form-group ">
-            <label for="title">Категория: </label>
+            <label for="category">Категория:
+                <span class="error">{{ form.category.errors }}</span>
+            </label>
             {{ form.category }}
         </div>
         <div class="form-group">
-            <label for="title">Телефон 1:</label>
+            <label for="title">Телефон 1:
+                <span class="error">{{ form.phone1.errors }}</span>
+            </label>
             {{ form.phone1 }}
         </div>
         <div class="form-group">
-            <label for="title">Телефон 2:</label>
+            <label for="title">Телефон 2:
+                <span class="error">{{ form.phone2.errors }}</span>
+            </label>
             {{ form.phone2 }}
         </div>
         <input class="btn-create" type="submit" value="Т&#1199;з&#1199;&#1199;">

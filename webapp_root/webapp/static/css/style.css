@@ -160,6 +160,10 @@ header{
       box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
 
 }
+.error{
+    color: red;
+    font-size:20px;
+}
 /*********************END AD_CREATE Form**********************/
 
 /******************START NAVBAR.Pagination********************/
