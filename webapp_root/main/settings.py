@@ -13,7 +13,9 @@ SECRET_KEY = 'l8x_l6hu))c9vqe#9@lt!%n_cr3*_vtiwo%hsn@+=!fp@r(1l9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'kochkorcity.kg',
+]
 
 
 # Application definition
