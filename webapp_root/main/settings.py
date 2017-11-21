@@ -15,6 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'kochkorcity.kg',
+    '127.0.0.1',
 ]
 
 

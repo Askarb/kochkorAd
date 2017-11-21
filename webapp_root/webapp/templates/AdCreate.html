@@ -12,7 +12,8 @@
         </div>
         <div class="form-group">
             <label for="images">C<span class="character">ү</span>рот:</label>
-            <input name="images" type="file" multiple>
+{#            <input name="images" type="file" multiple>#}
+            {{ form.images }}
         </div>
         <div class="form-group">
             <label for="text">Жарнама:
@@ -38,6 +39,6 @@
             </label>
             {{ form.phone2 }}
         </div>
-        <input class="btn-create" type="submit" value="Т&#1199;з&#1199;&#1199;">
+        <input class="btn btn-default" type="submit" value="Т&#1199;з&#1199;&#1199;">
     </form>
 {% endblock %}

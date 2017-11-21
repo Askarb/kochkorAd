@@ -1,6 +1,6 @@
 from time import time
 from slugify import slugify, CYRILLIC
-from .models import Ad, Category
+from .models import Ad, Category, AdImage
 from django.views.generic import TemplateView, FormView
 from .forms import CreateAdForm
 from django.core.urlresolvers import reverse_lazy
@@ -96,16 +96,17 @@ class CreationAdView(FormView):
             phone2=form.cleaned_data['phone2'],
             active=False
         )
-        print(ad.pk)
-        print(form.cleaned_data)
+        for i in self.request.FILES.getlist('images'):
+            AdImage.objects.create(ad=ad, image=i).save()
         # self.send_notification_to_telegram(form)
         return super().form_valid(form)
 
     def send_notification_to_telegram(self, form):
         token = '462585305:AAHk_kLP2kZhpAIA47iKldJuS4sOeJpcYIk'
         TelegramBot = telepot.Bot(token)
-        TelegramBot.sendMessage(chat_id='@kochkor', text='Title - {0}\r\nText - {1}'.format(form.cleaned_data['title'],
-                                                                         form.cleaned_data['text']))
+        TelegramBot.sendMessage(chat_id='@kochkor',
+                                text='Title - {0}\r\nText - {1}'.format(form.cleaned_data['title'],
+                                                                        form.cleaned_data['text']))
 
     def alert_to_email(self, form):
         send_mail(

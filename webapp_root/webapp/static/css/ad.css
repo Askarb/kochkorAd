@@ -7,7 +7,7 @@
     height:auto;
 }
 
-.item h2, .item .text{
+.item .text{
     display: inline-block;
     vertical-align: top;
 }

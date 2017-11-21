@@ -19,10 +19,9 @@ class Ad(models.Model):
     phone1 = models.CharField(max_length=20)
     phone2 = models.CharField(max_length=20, blank=True)
     active = models.BooleanField(default=True)
-    # image = models.ImageField(upload_to='ad', default='', blank=True, null=True)
 
 
 class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images')
-    image = models.ImageField(upload_to='ad', default='', blank=True, null=True)
+    image = models.ImageField(upload_to='ad')
 
