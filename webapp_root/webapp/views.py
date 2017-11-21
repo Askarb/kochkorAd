@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
 import telepot
 from django.utils import timezone
+from django.conf import settings
 
 
 class IndexView(TemplateView):
@@ -98,13 +99,15 @@ class CreationAdView(FormView):
         )
         for i in self.request.FILES.getlist('images'):
             AdImage.objects.create(ad=ad, image=i).save()
-        # self.send_notification_to_telegram(form)
+
+        self.send_notification_to_telegram(form)
         return super().form_valid(form)
 
     def send_notification_to_telegram(self, form):
-        token = '462585305:AAHk_kLP2kZhpAIA47iKldJuS4sOeJpcYIk'
-        TelegramBot = telepot.Bot(token)
-        TelegramBot.sendMessage(chat_id='@kochkor',
+        if not settings.DEBUG:
+            token = '462585305:AAHk_kLP2kZhpAIA47iKldJuS4sOeJpcYIk'
+            TelegramBot = telepot.Bot(token)
+            TelegramBot.sendMessage(chat_id='@kochkor',
                                 text='Title - {0}\r\nText - {1}'.format(form.cleaned_data['title'],
                                                                         form.cleaned_data['text']))
 
