@@ -16,8 +16,13 @@ body{
 
 /***************START HEADER**********************/
 header{
+    margin: 20px 0;
     padding: 15px 10px;
     background-color: #00B0E8;
+
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
 }
 .logo{
     margin: 0;
@@ -116,9 +121,16 @@ header{
 .content-wrap{
     padding: 10px 10px 10px 5px;
     background-color: #fff;
+
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
 }
 .content{
-    /*border: 1px solid red;*/
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
     width: 73%;
     float: left;
     padding: 10px;
@@ -144,7 +156,22 @@ header{
 .item .text{
     font-size:20px;
 }
-/*******************  **END BASE Content**********************/
+.description{
+    width: 445px;
+    display: inline-block;
+}
+
+.img-wrap-left{
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+}
+.img-wrap-left img{
+    width: 100%;
+    height:auto;
+}
+
+/*********************END BASE Content**********************/
 /*********************START AD_CREATE Form********************/
 .btn-create{
     padding: 10px 20px;

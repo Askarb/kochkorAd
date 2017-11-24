@@ -7,6 +7,9 @@
     <div class="">
         <nav class="nav-sidebar">
             <ul class="nav">
+                <li class="{% highlight_if_active 'webapp:all_ads' %}">
+                    <a href="{% url 'webapp:all_ads' %}">Акыркы жарнамалар</a>
+                </li>
                 {% for i in categories %}
                     <li class="{% if_active_category 'webapp:category' i.slug %}">
                         <a href="{% url 'webapp:category' i.slug %}">{{ i.name }}</a>

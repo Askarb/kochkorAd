@@ -20,6 +20,9 @@ class Ad(models.Model):
     phone2 = models.CharField(max_length=20, blank=True)
     active = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ['-date_update']
+
 
 class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images')

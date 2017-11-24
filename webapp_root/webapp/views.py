@@ -16,13 +16,34 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['items'] = self.get_last_ads()
+        context['items'] = self.get_all_ads()
+        context['categories'] = Category.objects.all()
+        return context
+
+    def get_all_ads(self):
+        paginator = Paginator(Ad.objects.all().filter(active=True), 5)
+        page = self.request.GET.get('page')
+        try:
+            ads = paginator.page(page)
+        except PageNotAnInteger:
+            ads = paginator.page(1)
+        except EmptyPage:
+            ads = paginator.page(paginator.num_pages)
+        return ads
+
+
+class AllAdView(TemplateView):
+    template_name = 'all_ads.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['items'] = self.get_all_ads()
         context['categories'] = Category.objects.all()
         context['title'] = 'Акыркы жарнамалар!'
         return context
 
-    def get_last_ads(self):
-        paginator = Paginator(Ad.objects.all().filter(active=True).order_by('-date_update'), 5)
+    def get_all_ads(self):
+        paginator = Paginator(Ad.objects.all().filter(active=True), 5)
         page = self.request.GET.get('page')
         try:
             ads = paginator.page(page)
@@ -38,13 +59,14 @@ class AdView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['item'] = Ad.objects.get(slug=self.get_ad_from_url())
+        context['item'] = self.get_ad_from_url()
         context['categories'] = Category.objects.all()
         return context
 
     def get_ad_from_url(self):
-        if 'ad' in self.kwargs:
-            return self.kwargs['ad']
+        if Ad.objects.filter(slug=self.kwargs['ad']).count() > 0:
+            return Ad.objects.get(slug=self.kwargs['ad'])
+        return None
 
 
 class CategoryView(TemplateView):
@@ -64,7 +86,7 @@ class CategoryView(TemplateView):
     def get_ads_by_category(self):
         paginator = Paginator(Ad.objects.all().filter(
             category=Category.objects.all().filter(slug=self.get_category_from_url())
-        ).filter(active=True).order_by('-date_update'), 5)
+        ).filter(active=True), 5)
         page = self.request.GET.get('page')
         try:
             ads = paginator.page(page)
@@ -97,8 +119,8 @@ class CreationAdView(FormView):
             phone2=form.cleaned_data['phone2'],
             active=False
         )
-        for i in self.request.FILES.getlist('images'):
-            AdImage.objects.create(ad=ad, image=i).save()
+        for image in self.request.FILES.getlist('images'):
+            AdImage.objects.create(ad=ad, image=image).save()
 
         self.send_notification_to_telegram(form)
         return super().form_valid(form)
@@ -111,21 +133,21 @@ class CreationAdView(FormView):
                                 text='Title - {0}\r\nText - {1}'.format(form.cleaned_data['title'],
                                                                         form.cleaned_data['text']))
 
-    def alert_to_email(self, form):
-        send_mail(
-            'Kochkor ad: '+form.cleaned_data['title'],
-            form.cleaned_data['text'],
-            'kochkorjarnama@gmail.com',
-            ['bolotbekov06@gmail.com'],
-            fail_silently=False,
-        )
-
     def get_slug_link(self, title):
         return slugify((title + '-' + str(int(round(time()*1000)))), pretranslate=CYRILLIC)
 
 
 class ThankView(TemplateView):
     template_name = 'thank.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+
+class BadURLView(TemplateView):
+    template_name = 'page-404.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
