@@ -20,15 +20,26 @@
 
       gtag('config', 'UA-107668524-1');
     </script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4682358258937194",
+        enable_page_level_ads: true
+      });
+    </script>
 
 </head>
 <body>
     {% include 'header.html' %}
     {% include 'navbar.html' %}
-{#    {% block slider %}{% endblock %}#}
     <div class="container">
         <div class="content-wrap clearfix">
-            {% include 'sidebar.html' %}
+            <div class="sidebar">
+                {% include 'sidebar.html' %}
+                <div class="gads">
+                </div>
+            </div>
+
             <div class="content">
                 {% block content %} {% endblock %}
             </div>
