@@ -1,15 +1,16 @@
 {% load appearance %}
+{% load i18n %}
+
 <div class="container" xmlns="http://www.w3.org/1999/html">
     <nav class="menu">
         <ul>
             <li class="{% highlight_if_active 'webapp:index' %}">
-                <a href="{% url 'webapp:index' %}">Башкы баракча</a>
+                <a href="{% url 'webapp:index' %}">{% trans 'Main page'%}</a>
             </li>
-            <li class="{% highlight_if_active 'webapp:adCreate' %}">
-                <a href="{% url 'webapp:adCreate' %}" class="create">Жарнама
-                    т<span class="character">ү</span>з<span class="character">үү</span>
-                </a>
+            <li class="{% highlight_if_active 'webapp:ad_create' %}">
+                <a href="{% url 'webapp:ad_create' %}" class="create">{% trans 'Create ad' %}</a>
             </li>
         </ul>
     </nav>
 </div>
+

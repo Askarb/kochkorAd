@@ -3,12 +3,12 @@ from slugify import slugify, CYRILLIC
 from .models import Ad, Category, AdImage
 from django.views.generic import TemplateView, FormView
 from .forms import CreateAdForm
-from django.core.urlresolvers import reverse_lazy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.mail import send_mail
 import telepot
 from django.utils import timezone
 from django.conf import settings
+from django.utils.translation import gettext as _
+from django.urls import reverse_lazy
 
 
 class IndexView(TemplateView):
@@ -39,7 +39,7 @@ class AllAdView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['items'] = self.get_all_ads()
         context['categories'] = Category.objects.all()
-        context['title'] = 'Акыркы жарнамалар!'
+        context['title'] = _('Latest ads!')
         return context
 
     def get_all_ads(self):
@@ -76,24 +76,20 @@ class CategoryView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['items'] = self.get_ads_by_category()
-        context['title'] = 'Категория боюнча жарнамалар!'
+        context['title'] = _('Ads by category!')
         return context
 
-    def get_category_from_url(self):
-        if 'category' in self.kwargs:
-            return self.kwargs['category']
-
     def get_ads_by_category(self):
-        paginator = Paginator(Ad.objects.all().filter(
-            category=Category.objects.all().filter(slug=self.get_category_from_url())
-        ).filter(active=True), 5)
+        paginator = Paginator(Ad.objects.filter(
+            category=Category.objects.get(slug=self.kwargs['category']), active=True), 5)
+
         page = self.request.GET.get('page')
         try:
-            ads = paginator.page(page)
+            ads = paginator.get_page(page)
         except PageNotAnInteger:
-            ads = paginator.page(1)
+            ads = paginator.get_page(1)
         except EmptyPage:
-            ads = paginator.page(paginator.num_pages)
+            ads = paginator.get_page(paginator.num_pages)
         return ads
 
 

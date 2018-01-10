@@ -1,40 +1,9 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load staticfiles %}
 
 {% block title %}Кочкор CITY{% endblock %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
-    <div class="items">
-        {% for item in items %}
-            <div class="item">
-                {% if item.images.first %}
-                    <div class="img-wrap-left">
-                        <a href="{% url 'webapp:ad' item.slug %}"><img src="{{ item.images.first.image.url }}" alt="{{ item.title }}"></a>
-                    </div>
-                {% endif %}
-                <div class="description">
-                    <h2><a href="{% url 'webapp:ad' item.slug %}">{{ item.title }}</a></h2>
-                    <p class="text">{{ item.text|safe|truncatechars:120  }}</p>
-                    <p>Date created: <b>{{ item.date_create }}</b></p>
-                    <span class="category">Категория: <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a></span>
-                </div>
-            </div>
-        {% endfor %}
-        <div class="pagination">
-            <span class="step-links">
-                {% if items.has_previous %}
-                    <a href="?page={{ items.previous_page_number }}">мурунку баракчага отуу</a>
-                {% endif %}
-
-                <span class="current">
-                     <b>{{ items.paginator.num_pages }}</b> баракчанын <b>{{ items.number }}</b> баракчасы.
-                </span>
-
-                {% if items.has_next %}
-                    <a href="?page={{ items.next_page_number }}">кийинки баракча отуу</a>
-                {% endif %}
-            </span>
-        </div>
-    </div>
+    {% include 'items.html' %}
 {% endblock %}

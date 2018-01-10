@@ -3,4 +3,5 @@ venv
 *.pyc
 .idea
 .directory
+*.mo
 

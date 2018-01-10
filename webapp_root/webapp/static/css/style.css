@@ -59,6 +59,29 @@ header{
     background-color: #4CAF50;
     color: #fff;
 }
+.lang {
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 130px;
+}
+.lang input{
+    background-image: url("/static/img/flags-lang.png");
+    background-repeat: no-repeat;
+    font-size: 0;
+    width: 29px;
+    height: 20px;
+    border: none;
+    margin: 0 10px;
+}
+.lang input[value="en"] {
+    background-position: 0 0;
+}
+.lang input[value="ru"]{
+    background-position: -28px 0;
+}
+.lang input[value="ky"]{
+    background-position: -56px 0;
+}
 /***************END HEADER**********************/
 
 /*******************START SIDEBAR***************/
