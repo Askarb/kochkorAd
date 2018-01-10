@@ -1,14 +1,16 @@
-
-from django.conf.urls import url
+from django.urls import path, re_path
 from .views import IndexView, AllAdView, CategoryView, AdView, CreationAdView, ThankView, BadURLView
+from django.utils.translation import gettext_lazy as _
 
-urlpatterns = [
-    url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^ad/$', AllAdView.as_view(), name='all_ads'),
-    url(r'^category/(?P<category>[\w-]+)/$', CategoryView.as_view(), name='category'),
-    url(r'^ad/(?P<ad>[\w-]+)/$', AdView.as_view(), name='ad'),
-    url(r'^adcreate/$', CreationAdView.as_view(), name='adCreate'),
-    url(r'^success/$', ThankView.as_view(), name='thank'),
-    url(r'^', BadURLView.as_view(), name='bad_url'),
-]
+
+app_name = 'webapp'
+urlpatterns = (
+    path('', IndexView.as_view(), name='index'),
+    path('ad/', AllAdView.as_view(), name='all_ads'),
+    path('category/<slug:category>/', CategoryView.as_view(), name='category'),
+    path('ad/<slug:ad>/', AdView.as_view(), name='ad'),
+    path('adcreate/', CreationAdView.as_view(), name='ad_create'),
+    path('success/', ThankView.as_view(), name='thank'),
+    # re_path('', BadURLView.as_view(), name='bad_url'),
+)
 

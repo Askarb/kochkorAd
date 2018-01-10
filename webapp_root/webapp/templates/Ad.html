@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}{{ item.title }}{% endblock %}
@@ -28,16 +29,16 @@
                 </div>
                 <h2>{{ item.title }}</h2>
                 <p class="text">{{ item.text  }}</p>
-                <p>Телефон:
+                <p>{% trans 'Phone' %}:
                     {% if item.phone1 %}
                         <span>{{ item.phone1 }}</span>
                     {% endif %}
                     {% if item.phone2 %}111
-                        <span> ; {{ item.phone2 }}</span>
+                        <span>; {{ item.phone2 }}</span>
                     {% endif %}
                 </p>
-                <p>Date created: <b>{{ item.date_create }}</b></p>
-                <span class="category">Категория:
+                <p>{% trans 'Date of creation' %}: <b>{{ item.date_create }}</b></p>
+                <span class="category">{% trans 'Category' %}:
                     <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a>
                 </span>
             </div>

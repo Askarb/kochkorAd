@@ -12,7 +12,7 @@ class Category(models.Model):
 class Ad(models.Model):
     title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=255, unique=True, blank=False, null=False)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,)
     text = models.TextField(verbose_name='Text')
     date_create = models.DateTimeField()
     date_update = models.DateTimeField()
@@ -25,6 +25,6 @@ class Ad(models.Model):
 
 
 class AdImage(models.Model):
-    ad = models.ForeignKey(Ad, related_name='images')
+    ad = models.ForeignKey(Ad, related_name='images', on_delete=models.CASCADE,)
     image = models.ImageField(upload_to='ad')
 
