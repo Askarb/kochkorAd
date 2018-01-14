@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-10 12:44+0600\n"
+"POT-Creation-Date: 2018-01-14 12:47+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,10 @@ msgstr "Түзүлгөн датасы"
 #: templates/items.html:16
 msgid "Category"
 msgstr "Категория"
+
+#: templates/Ad.html:53 templates/Ad.html:62
+msgid "Share"
+msgstr "Бөлүшүү"
 
 #: templates/AdCreate.html:7 templates/header.html:25 templates/navbar.html:11
 #: templates/thank.html:4
@@ -87,10 +91,10 @@ msgstr "Башкы баракча"
 msgid "Categories"
 msgstr "Категория"
 
-#: views.py:41
+#: views.py:42
 msgid "Latest ads!"
 msgstr "Акыркы жарнамалар!"
 
-#: views.py:78
+#: views.py:79
 msgid "Ads by category!"
 msgstr "Категория боюнча жарнамалар!"
