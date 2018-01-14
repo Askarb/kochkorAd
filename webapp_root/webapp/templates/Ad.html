@@ -41,8 +41,6 @@
                 <span class="category">{% trans 'Category' %}:
                     <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a>
                 </span> <br> <br>
-            <p>
-                <h2><a href="{% url 'webapp:ad' item.slug %}">{{ item.title }}</a></h2></p>
 
                 <div class="fb-share-button"
                      data-href="http://kochkorcity.kg{% url 'webapp:ad' item.slug %}"
@@ -57,7 +55,7 @@
             {#    ok#}
                 <a class="ok_share" target="_blank" href="https://connect.ok.ru/offer
 ?url=http://kochkorcity.kg/ad/{{ item.slug }}/
-&title={{ item.slug }}
+&title={{ item.title }}
 &description={{ item.text }}
 &imageUrl=http://kochkorcity.kg{{ item.images.first.image.url }}">{% trans 'Share' %}</a>
 
