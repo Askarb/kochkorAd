@@ -40,7 +40,29 @@
                 <p>{% trans 'Date of creation' %}: <b>{{ item.date_create }}</b></p>
                 <span class="category">{% trans 'Category' %}:
                     <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a>
-                </span>
+                </span> <br> <br>
+            <p>
+                <h2><a href="{% url 'webapp:ad' item.slug %}">{{ item.title }}</a></h2></p>
+
+                <div class="fb-share-button"
+                     data-href="http://kochkorcity.kg{% url 'webapp:ad' item.slug %}"
+                     data-layout="button"
+                     data-size="large"
+                     data-mobile-iframe="true">
+                    <a class="fb-xfbml-parse-ignore" target="_blank"
+                       href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fkochkorcity.kg%2Fru%2Fad%2F{{ item.slug }}%2F&amp;src=sdkpreparse">{% trans 'Share' %}</a>
+                </div>
+
+
+            {#    ok#}
+                <a class="ok_share" target="_blank" href="https://connect.ok.ru/offer
+?url=http://kochkorcity.kg/ad/{{ item.slug }}/
+&title={{ item.slug }}
+&description={{ item.text }}
+&imageUrl=http://kochkorcity.kg{{ item.images.first.image.url }}">{% trans 'Share' %}</a>
+
+{#    ok_end#}
+
             </div>
         </div>
     {% else %}
@@ -56,4 +78,29 @@
         adaptiveHeight: true
     });
     </script>
+
+
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=950068138435409';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
 {% endblock %}
+
+{% block meta %}
+    <meta property="og:url"                content="http://kochkorcity.kg{% url 'webapp:ad' item.slug %}" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="{{ item.title }}" />
+    <meta property="og:description"        content="{{ item.text }}" />
+    <meta property="og:image"              content="http://kochkorcity.kg{{ item.images.first.image.url }}" />
+{% endblock %}
+
