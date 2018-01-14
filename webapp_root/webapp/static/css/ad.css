@@ -11,3 +11,22 @@
     display: inline-block;
     vertical-align: top;
 }
+.ok_share{
+    display: inline-block;
+    text-decoration: none!important;
+    padding: 11px 7px 10px 31px;
+    background-image: url("/static/img/ok-logo.png");
+    background-position: 6px 6px;
+    background-repeat: no-repeat;
+    background-color: #ee8208;
+    font-size: 15px;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: #fff!important;
+    font-weight: bold;
+    margin-left: 20px;
+
+    /*background-size: 300px 100px;;*/
+}
