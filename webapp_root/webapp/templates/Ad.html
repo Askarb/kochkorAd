@@ -86,7 +86,8 @@
       js = d.createElement(s); js.id = id;
       js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=950068138435409';
       fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
 
 
 
@@ -96,9 +97,9 @@
 
 {% block meta %}
     <meta property="og:url"                content="http://kochkorcity.kg{% url 'webapp:ad' item.slug %}" />
-    <meta property="og:type"               content="article" />
+    <meta property="og:type"               content="website" />
     <meta property="og:title"              content="{{ item.title }}" />
     <meta property="og:description"        content="{{ item.text }}" />
-    <meta property="og:image"              content="http://kochkorcity.kg{{ item.images.first.image.url }}" />
+    <meta property="og:image"              content="http://kochkorcity.kg{% if item.images.first.image.url %}{{ item.images.first.image.url }}{% else %}{% static 'img/img_for_social.png' %}{% endif %}" />
 {% endblock %}
 

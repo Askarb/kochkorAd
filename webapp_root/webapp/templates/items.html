@@ -12,7 +12,7 @@
             <div class="description">
                 <h2><a href="{% url 'webapp:ad' item.slug %}">{{ item.title }}</a></h2>
                 <p class="text">{{ item.text|safe|truncatechars:120  }}</p>
-                <p>{% trans 'Date of creation' %}: <b>{{ item.date_create }}</b></p>
+{#                <p>{% trans 'Date of creation' %}: <b>{{ item.date_create }}</b></p>#}
                 <span class="category">{% trans 'Category' %}: <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a></span>
             </div>
         </div>
