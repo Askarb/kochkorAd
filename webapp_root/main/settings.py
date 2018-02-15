@@ -149,3 +149,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'kochkorjarnama@gmail.com'
 EMAIL_HOST_PASSWORD = '1qaz@WSX28'
 EMAIL_PORT = 587
+
+
+ADS_PER_PAGE = 10
+
+TELEGRAM_TOKEN = '462585305:AAHk_kLP2kZhpAIA47iKldJuS4sOeJpcYIk'

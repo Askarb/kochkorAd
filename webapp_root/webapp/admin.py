@@ -16,7 +16,8 @@ class AdAdmin(admin.ModelAdmin):
 
     actions_on_top = True
     save_on_top = True
-    list_display = ['title', 'category', 'date_create', 'phone1', 'phone2', 'active']
+    list_display = ['title', 'category', 'date_create', 'phone1', 'phone2', 'active',
+                    'rise_count', 'view_count']
     list_filter = ['active']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [AdImageInline, ]

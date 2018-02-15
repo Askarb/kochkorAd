@@ -19,6 +19,8 @@ class Ad(models.Model):
     phone1 = models.CharField(max_length=20)
     phone2 = models.CharField(max_length=20, blank=True)
     active = models.BooleanField(default=True)
+    rise_count = models.IntegerField(default=0)
+    view_count = models.IntegerField(default=0)
 
     class Meta:
         ordering = ['-date_update']

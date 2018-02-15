@@ -1,68 +1,20 @@
 /***************START GLOBAL**********************/
-body{
-    margin: 0;
-    padding: 0;
-    background-color: #ebedf3;
+
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+  height: 100%;
 }
-.container{
-    width: 1000px;
-    margin: 0 auto;
-}
-.character {
-    font-size: 0.88em;
-    font-weight: bolder;
-}
+
 /***************END GLOBAL**********************/
 
-/***************START HEADER**********************/
-header{
+/***************START NAVBAR**********************/
+.navbar{
     margin: 20px 0;
-    padding: 15px 10px;
-    background-color: #00B0E8;
-
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-}
-.logo{
-    margin: 0;
-    display: inline-block;
-}
-.logo a{
-    text-decoration: none;
-    font-size: 45px;
-    color: #FFFEDC;
-}
-.logo a:active{
-    color: #0000ee;
-}
-.logo a span{
-    display: block;
-    line-height: .8;
-}
-.create-ad-block{
-    width: 250px;
-    float: right;
-}
-.create-ad-block .create{
-    font-weight: bold;
-    font-size: 25px;
-    padding: 10px;
-    background-color: #fff;
-    display: inline-block;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-    text-decoration: none;
-}
-.create-ad-block .create:hover{
-    background-color: #4CAF50;
-    color: #fff;
 }
 .lang {
     vertical-align: top;
     display: inline-block;
-    margin-left: 130px;
 }
 .lang input{
     background-image: url("/static/img/flags-lang.png");
@@ -72,6 +24,7 @@ header{
     height: 20px;
     border: none;
     margin: 0 10px;
+    cursor: pointer;
 }
 .lang input[value="en"] {
     background-position: 0 0;
@@ -82,62 +35,10 @@ header{
 .lang input[value="ky"]{
     background-position: -56px 0;
 }
-/***************END HEADER**********************/
+/***************END NAVBAR**********************/
 
 /*******************START SIDEBAR***************/
-.sidebar{
-    /*border: 1px solid blue;*/
-    width: 25%;
-    float: left;
-    padding: 10px 10px 10px 5px;
-}
-.nav-sidebar {
-    width: 100%;
-    padding: 15px;
-    border-right: 1px solid #ddd;
-    background-color: #ADD8E6;
-        -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-}
-.nav-sidebar a {
-    color: #333;
-    font-size: 18px;
-    -webkit-transition: all 0.08s linear;
-    -moz-transition: all 0.08s linear;
-    -o-transition: all 0.08s linear;
-    transition: all 0.08s linear;
-    -webkit-border-radius: 4px 0 0 4px;
-    -moz-border-radius: 4px 0 0 4px;
-    border-radius: 4px 0 0 4px;
-}
-.nav-sidebar .active a {
-    cursor: default;
-    background-color: #428bca;
-    color: #fff;
-    text-shadow: 1px 1px 1px #666;
-}
-.nav-sidebar .active a:hover {
-    background-color: #428bca;
-}
-.nav-sidebar .text-overflow a,
-.nav-sidebar .text-overflow .media-body {
-    white-space: nowrap;
-    overflow: hidden;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-}
 
-/* Right-aligned sidebar */
-.nav-sidebar.pull-right {
-    border-right: 0;
-    border-left: 1px solid #ddd;
-}
-.nav-sidebar.pull-right a {
-    -webkit-border-radius: 0 4px 4px 0;
-    -moz-border-radius: 0 4px 4px 0;
-    border-radius: 0 4px 4px 0;
-}
 /************************END SIDEBAR************************/
 
 /*********************START BASE Content********************/

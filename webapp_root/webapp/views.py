@@ -1,14 +1,16 @@
+import telepot
 from time import time
+from .forms import CreateAdForm
+from django.conf import settings
+from django.utils import timezone
+from django.urls import reverse_lazy
 from slugify import slugify, CYRILLIC
 from .models import Ad, Category, AdImage
-from django.views.generic import TemplateView, FormView
-from .forms import CreateAdForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-import telepot
-from django.utils import timezone
-from django.conf import settings
+from django.views.generic.base import View
+from django.http import HttpResponseRedirect
 from django.utils.translation import gettext as _
-from django.urls import reverse_lazy
+from django.views.generic import TemplateView, FormView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class IndexView(TemplateView):
@@ -21,7 +23,7 @@ class IndexView(TemplateView):
         return context
 
     def get_all_ads(self):
-        paginator = Paginator(Ad.objects.all().filter(active=True), 5)
+        paginator = Paginator(Ad.objects.all().filter(active=True), settings.ADS_PER_PAGE)
         page = self.request.GET.get('page')
         try:
             ads = paginator.page(page)
@@ -43,7 +45,7 @@ class AllAdView(TemplateView):
         return context
 
     def get_all_ads(self):
-        paginator = Paginator(Ad.objects.all().filter(active=True), 5)
+        paginator = Paginator(Ad.objects.all().filter(active=True), settings.ADS_PER_PAGE)
         page = self.request.GET.get('page')
         try:
             ads = paginator.page(page)
@@ -65,7 +67,11 @@ class AdView(TemplateView):
 
     def get_ad_from_url(self):
         if Ad.objects.filter(slug=self.kwargs['ad']).count() > 0:
-            return Ad.objects.get(slug=self.kwargs['ad'])
+            ad = Ad.objects.get(slug=self.kwargs['ad'])
+            if self.request.user.is_anonymous:
+                ad.view_count += 1
+                ad.save()
+            return ad
         return None
 
 
@@ -81,7 +87,7 @@ class CategoryView(TemplateView):
 
     def get_ads_by_category(self):
         paginator = Paginator(Ad.objects.filter(
-            category=Category.objects.get(slug=self.kwargs['category']), active=True), 5)
+            category=Category.objects.get(slug=self.kwargs['category']), active=True), settings.ADS_PER_PAGE)
 
         page = self.request.GET.get('page')
         try:
@@ -91,6 +97,25 @@ class CategoryView(TemplateView):
         except EmptyPage:
             ads = paginator.get_page(paginator.num_pages)
         return ads
+
+
+class RiseAdView(View):
+
+    def get(self):
+        return HttpResponseRedirect('/')
+
+    def post(self, *args, **kwargs):
+        try:
+            ad = Ad.objects.get(pk=kwargs['pk'])
+            ad.date_update = timezone.now()
+            ad.rise_count += 1
+            ad.save()
+        except Ad.DoesNotExist:
+            pass
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return self.request.META['HTTP_REFERER']
 
 
 class CreationAdView(FormView):
@@ -106,14 +131,14 @@ class CreationAdView(FormView):
     def form_valid(self, form):
         ad = Ad.objects.create(
             title=form.cleaned_data['title'],
-            slug=self.get_slug_link(form.cleaned_data['title']),
+            slug=self.generate_slug(form.cleaned_data['title']),
             text=form.cleaned_data['text'],
             category=form.cleaned_data['category'],
             date_create=timezone.now(),
             date_update=timezone.now(),
             phone1=form.cleaned_data['phone1'],
             phone2=form.cleaned_data['phone2'],
-            active=False
+            active=self.request.user.is_superuser
         )
         for image in self.request.FILES.getlist('images'):
             AdImage.objects.create(ad=ad, image=image).save()
@@ -122,14 +147,13 @@ class CreationAdView(FormView):
         return super().form_valid(form)
 
     def send_notification_to_telegram(self, form):
-        if not settings.DEBUG:
-            token = '462585305:AAHk_kLP2kZhpAIA47iKldJuS4sOeJpcYIk'
-            TelegramBot = telepot.Bot(token)
-            TelegramBot.sendMessage(chat_id='@kochkor',
+        if not self.request.user.is_superuser:
+            TelegramBot = telepot.Bot(settings.TELEGRAM_TOKEN)
+            TelegramBot.sendMessage(chat_id='@bolotbekov',
                                 text='Title - {0}\r\nText - {1}'.format(form.cleaned_data['title'],
                                                                         form.cleaned_data['text']))
 
-    def get_slug_link(self, title):
+    def generate_slug(self, title):
         return slugify((title + '-' + str(int(round(time()*1000)))), pretranslate=CYRILLIC)
 
 

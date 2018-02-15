@@ -8,9 +8,26 @@
     {% block meta %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
     {% block css %} {% endblock %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row">
+{#            <div class="col-md-3">#}
+                {% include 'sidebar.html' %}
+{#            </div>#}
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
 
+{#    {% include 'footer.html' %}#}
+</body>
     <script src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% block js %} {% endblock %}
@@ -31,24 +48,4 @@
           });
         </script>
     {% endif %}
-</head>
-<body>
-    {% include 'header.html' %}
-    {% include 'navbar.html' %}
-    <div class="container">
-        <div class="content-wrap clearfix">
-            <div class="sidebar">
-                {% include 'sidebar.html' %}
-                <div class="gads">
-                </div>
-            </div>
-            <div class="content">
-                {% block content %} {% endblock %}
-            </div>
-        </div>
-    </div>
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-
-{#    {% include 'footer.html' %}#}
-</body>
 </html>
