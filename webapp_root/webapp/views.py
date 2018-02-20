@@ -147,9 +147,9 @@ class CreationAdView(FormView):
         return super().form_valid(form)
 
     def send_notification_to_telegram(self, form):
-        if not self.request.user.is_superuser:
+        if not self.request.user.is_authenticated:
             TelegramBot = telepot.Bot(settings.TELEGRAM_TOKEN)
-            TelegramBot.sendMessage(chat_id='@bolotbekov',
+            TelegramBot.sendMessage(chat_id='@kochkor',
                                 text='Title - {0}\r\nText - {1}'.format(form.cleaned_data['title'],
                                                                         form.cleaned_data['text']))
 
