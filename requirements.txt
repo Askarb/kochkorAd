@@ -6,3 +6,4 @@ Pillow==4.3.0
 awesome-slugify==1.6.5
 telepot==12.5
 psycopg2-binary==2.7.4
+opbeat==3.6.1

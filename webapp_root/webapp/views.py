@@ -138,7 +138,7 @@ class CreationAdView(FormView):
             date_update=timezone.now(),
             phone1=form.cleaned_data['phone1'],
             phone2=form.cleaned_data['phone2'],
-            active=self.request.user.is_superuser
+            active=True
         )
         for image in self.request.FILES.getlist('images'):
             AdImage.objects.create(ad=ad, image=image).save()

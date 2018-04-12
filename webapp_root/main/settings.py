@@ -1,24 +1,23 @@
+import environ
 import os
 
 import django.conf.locale
+from django.utils.translation import gettext_lazy as _
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+root = environ.Path(__file__) - 2
+env = environ.Env(DEBUG=(bool, False), )
+environ.Env.read_env()
+
+DEBUG = env('DEBUG')
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '@o9eqyruv*%!!h6)8qgprd2xrn*03e+&d+dg3zb9e@03-kg6f2'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -30,8 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'webapp',
     'ckeditor',
-    # 'djangocms_page_sitemap',
+    'opbeat.contrib.django',
 ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -41,7 +41,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+    'webapp.middleware.WebappMiddleware',
 ]
+
+OPBEAT = {
+    'ORGANIZATION_ID': env('OPBEAT_ORGANIZATION_ID', default=''),
+    'APP_ID': env('OPBEAT_APP_ID', default=''),
+    'SECRET_TOKEN': env('OPBEAT_SECRET_TOKEN', default=''),
+}
 
 ROOT_URLCONF = 'main.urls'
 
@@ -71,16 +79,8 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kochkor',
-        'USER': 'intellect_user',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': 5432,
-    }
+    'default': env.db(),
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -100,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-from django.utils.translation import gettext_lazy as _
 
 LANGUAGES = [
     ('ky', _('Kyrgyz')),
@@ -144,7 +143,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if env('DEBUG'):
+    MEDIA_ROOT = root('media')
+else:
+    MEDIA_ROOT = os.path.join('/mnt/media/kochkor')
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
