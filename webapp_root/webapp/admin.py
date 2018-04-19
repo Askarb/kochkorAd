@@ -16,12 +16,12 @@ class AdAdmin(admin.ModelAdmin):
 
     actions_on_top = True
     save_on_top = True
-    list_display = ['title', 'category', 'date_create', 'phone1', 'phone2', 'active',
+    list_display = ['title', 'category', 'date_create', 'phone1', 'phone2', 'is_active',
                     'rise_count', 'view_count']
-    list_filter = ['active']
-    prepopulated_fields = {"slug": ("title",)}
-    inlines = [AdImageInline, ]
-    list_editable = ['active']
+    # list_filter = ['is_active']
+    # prepopulated_fields = {"slug": ("title",)}
+    # inlines = [AdImageInline, ]
+    # list_editable = ['is_active']
 
 
 admin.site.register(Category, CategoryAdmin)

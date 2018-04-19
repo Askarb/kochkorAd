@@ -1,35 +1,38 @@
 {% load i18n %}
-{% if items %}
+{% if ad_list %}
     <h1>{{ title }}</h1>
     <div class="items">
-        {% for item in items %}
+        {% for ad in ad_list %}
         <div class="item">
-            {% if item.images.first %}
+            {% if ad.images.first %}
                 <div class="img-wrap-left">
-                    <a href="{% url 'webapp:ad' item.slug %}"><img src="{{ item.images.first.image.url }}" alt="{{ item.title }}"></a>
+                    <a href="{% url 'webapp:ad' ad.slug %}">
+                        <img src="{{ ad.images.first.image.url }}" alt="{{ ad.title }}">
+                    </a>
                 </div>
             {% endif %}
             <div class="description">
-                <h2><a href="{% url 'webapp:ad' item.slug %}">{{ item.title }}</a></h2>
-                <p class="text">{{ item.text|safe|truncatechars:120  }}</p>
+                <h2><a href="{% url 'webapp:ad' ad.slug %}">{{ ad.title }}</a></h2>
+
+                <p class="text">{{ ad.text|safe|truncatechars:120  }}</p>
 {#                <p>{% trans 'Date of creation' %}: <b>{{ item.date_create }}</b></p>#}
-                <span class="category">{% trans 'Category' %}: <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a></span>
+                <span class="category">{% trans 'Category' %}: <a href="{% url 'webapp:category' ad.category.slug %}"> <b>{{ ad.category }}</b></a></span>
             </div>
         </div>
         {% endfor %}
     </div>
     <div class="pagination">
         <span class="step-links">
-            {% if items.has_previous %}
-                <a href="?page={{ items.previous_page_number }}">{% trans 'previous page' %}</a>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">{% trans 'previous page' %}</a>
             {% endif %}
 
             <span class="current">
-                 <b>{{ items.paginator.num_pages }}</b> {% trans 'page of' %} <b> {{ items.number }}</b>
+                 <b>{{ page_obj.paginator.num_pages }}</b> {% trans 'page of' %} <b> {{ page_obj.number }}</b>
             </span>
 
-            {% if items.has_next %}
-                <a href="?page={{ items.next_page_number }}">{% trans 'next page' %}</a>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">{% trans 'next page' %}</a>
             {% endif %}
         </span>
     </div>

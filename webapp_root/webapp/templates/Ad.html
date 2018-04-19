@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}{{ item.title }}{% endblock %}
+{% block title %}{{ object.title }}{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
@@ -16,19 +16,19 @@
 {% endblock %}
 
 {% block meta %}
-    <meta property="og:url"                content="http://kochkorcity.kg{% url 'webapp:ad' item.slug %}" />
+    <meta property="og:url"                content="http://kochkorcity.kg{% url 'webapp:ad' object.slug %}" />
     <meta property="og:type"               content="website" />
-    <meta property="og:title"              content="{{ item.title }}" />
-    <meta property="og:description"        content="{{ item.text }}" />
-    <meta property="og:image"              content="http://kochkorcity.kg{% if item.images.first.image.url %}{{ item.images.first.image.url }}{% else %}{% static 'img/img_for_social.png' %}{% endif %}" />
+    <meta property="og:title"              content="{{ object.title }}" />
+    <meta property="og:description"        content="{{ object.text }}" />
+    <meta property="og:image"              content="http://kochkorcity.kg{% if object.images.first.image.url %}{{ object.images.first.image.url }}{% else %}{% static 'img/img_for_social.png' %}{% endif %}" />
 {% endblock %}
 
 {% block content %}
-    {% if item %}
+    {% if object %}
         <div class="items">
             <div class="item">
                 <div class="slider">
-                    {% for image in item.images.all %}
+                    {% for image in object.images.all %}
                         <div class="slide">
                             <div class="img-wrap">
                                 <img src="{{ image.image.url }}" />
@@ -36,23 +36,23 @@
                         </div>
                     {% endfor %}
                 </div>
-                <h2>{{ item.title }}</h2>
-                <p class="text">{{ item.text  }}</p>
+                <h2>{{ object.title }}</h2>
+                <p class="text">{{ object.text  }}</p>
                 <p>{% trans 'Phone' %}:
-                    {% if item.phone1 %}
-                        <span>{{ item.phone1 }}</span>
+                    {% if object.phone1 %}
+                        <span>{{ object.phone1 }}</span>
                     {% endif %}
-                    {% if item.phone2 %}
-                        <span>; {{ item.phone2 }}</span>
+                    {% if object.phone2 %}
+                        <span>; {{ object.phone2 }}</span>
                     {% endif %}
                 </p>
                 <span class="category">{% trans 'Category' %}:
-                    <a href="{% url 'webapp:category' item.category.slug %}"> <b>{{ item.category }}</b></a>
+                    <a href="{% url 'webapp:category' object.category.slug %}"> <b>{{ object.category }}</b></a>
                 </span>
                 <br><br>
             <div class="row">
                 <div class="col-md-3 col-sm-6">
-                    <form action="{% url 'webapp:rise_ad' item.pk %}" method="POST">
+                    <form action="{% url 'webapp:rise_ad' object.pk %}" method="POST">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-success">{% trans 'Raise an ad' %}</button>
                     </form>
@@ -60,13 +60,13 @@
                 </div>
                 <div class="col-md-3 col-sm-6">
 
-            {#    ok#}
+
                 <a class="ok_share" target="_blank" href="https://connect.ok.ru/offer
-                ?url=http://kochkorcity.kg/ad/{{ item.slug }}/
-                &title={{ item.title }}
-                &description={{ item.text }}
-                &imageUrl=http://kochkorcity.kg{{ item.images.first.image.url }}">{% trans 'Share' %}</a>
-            {#    ok_end#}
+                ?url=http://kochkorcity.kg/ad/{{ object.slug }}/
+                &title={{ object.title }}
+                &description={{ object.text }}
+                &imageUrl=http://kochkorcity.kg{{ object.images.first.image.url }}">{% trans 'Share' %}</a>
+
                 </div>
             </div>
             </div>

@@ -9,7 +9,7 @@ root = environ.Path(__file__) - 2
 env = environ.Env(DEBUG=(bool, False), )
 environ.Env.read_env()
 
-DEBUG = env('DEBUG')
+DEBUG = env('DEBUG', default=False)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'widget_tweaks',
     'webapp',
     'ckeditor',
     'opbeat.contrib.django',
