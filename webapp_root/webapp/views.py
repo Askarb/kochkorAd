@@ -57,8 +57,11 @@ class CategoryView(ContextMixin, ListView):
 
 class RiseAdView(View):
 
-    def get(self):
-        return HttpResponseRedirect('/')
+    def get(self, *args, **kwargs):
+        try:
+            return HttpResponseRedirect(reverse("webapp:ad", args=[Ad.objects.get(pk=kwargs['pk']).slug]))
+        except Ad.DoesNotExist:
+            return HttpResponseRedirect('/')
 
     def post(self, *args, **kwargs):
         try:
