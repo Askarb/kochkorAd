@@ -2,9 +2,9 @@
 {% load i18n widget_tweaks %}
 
 
-{% block title %}Жарнама т&#1199;з&#1199;&#1199;{% endblock %}
+{% block title %}{% trans 'Create ad' %}{% endblock %}
 {% block content %}
-    <h1>{% trans 'Create ad' %}</h1>
+    <h2>{% trans 'Create ad' %}</h2>
     <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
         <div class="form-group">

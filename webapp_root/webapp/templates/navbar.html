@@ -1,16 +1,20 @@
-{% load appearance %}
-{% load i18n %}
+{% load i18n appearance staticfiles %}
 
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">{% trans 'Kochkor CITY' %}</a>
+<div class="logo">
+    <h1>
+        <a href="/"><img src="{% static 'img/logo.png' %}" alt="Кочкор жарнама"></a>
+        Кочкор жарнама
+    </h1>
+</div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item {% url 'webapp:index' %}">
+      <li class="nav-item {% highlight_if_active 'webapp:index' %}">
         <a class="nav-link" href="{% url 'webapp:index' %}">{% trans 'Main page'%}</a>
       </li>
       <li class="nav-item {% highlight_if_active 'webapp:ad_create' %}">
@@ -18,7 +22,7 @@
       </li>
     </ul>
       <div class="form-inline my-2 my-lg-0">
-                  <div class="lang">
+          <div class="lang">
             <form action="{% url 'set_language' %}" method="post" id="combogrados">{% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
                 {% get_current_language as LANGUAGE_CODE %}

@@ -24,6 +24,9 @@ class IndexView(ContextMixin, ListView):
     model = Ad
     paginate_by = 10
 
+    def get_queryset(self):
+        return Ad.objects.active()
+
 
 class AllAdView(ContextMixin, ListView):
     template_name = 'all_ads.html'
@@ -47,7 +50,7 @@ class CategoryView(ContextMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Ad.objects.filter(category__slug=self.kwargs['category'])
+        return Ad.objects.active().filter(category__slug=self.kwargs['category'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

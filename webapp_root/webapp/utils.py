@@ -16,4 +16,6 @@ def send_notification_to_telegram(request, form):
 
 
 def generate_slug(title):
+    if not title:
+        title = 'jarnama'
     return slugify((title + '-' + str(int(round(time()*1000)))), pretranslate=CYRILLIC)

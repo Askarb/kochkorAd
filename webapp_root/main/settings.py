@@ -11,12 +11,9 @@ environ.Env.read_env()
 
 DEBUG = env('DEBUG', default=False)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SECRET_KEY = env('SECRET_KEY')
 
-
-SECRET_KEY = '@o9eqyruv*%!!h6)8qgprd2xrn*03e+&d+dg3zb9e@03-kg6f2'
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['kochkorcity.kg'])
 
 
 INSTALLED_APPS = [
@@ -30,7 +27,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'webapp',
     'ckeditor',
-    'opbeat.contrib.django',
 ]
 
 MIDDLEWARE = [
@@ -45,12 +41,14 @@ MIDDLEWARE = [
     'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'webapp.middleware.WebappMiddleware',
 ]
+if not DEBUG:
+    INSTALLED_APPS += ['opbeat.contrib.django']
 
-OPBEAT = {
-    'ORGANIZATION_ID': env('OPBEAT_ORGANIZATION_ID', default=''),
-    'APP_ID': env('OPBEAT_APP_ID', default=''),
-    'SECRET_TOKEN': env('OPBEAT_SECRET_TOKEN', default=''),
-}
+    OPBEAT = {
+        'ORGANIZATION_ID': env('OPBEAT_ORGANIZATION_ID'),
+        'APP_ID': env('OPBEAT_APP_ID'),
+        'SECRET_TOKEN': env('OPBEAT_SECRET_TOKEN'),
+    }
 
 ROOT_URLCONF = 'main.urls'
 
@@ -58,7 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'webapp', 'templates'),
+            root('webapp', 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -108,13 +106,14 @@ LANGUAGES = [
     ('en', _('English')),
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'main', 'locale'),
-    os.path.join(BASE_DIR, 'webapp', 'locale'),
+    root('main', 'locale'),
+    root('webapp', 'locale'),
 )
+
 EXTRA_LANG_INFO = {
     'ky': {
         'bidi': False, # right-to-left
@@ -138,10 +137,12 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = root('staticfiles')
+STATICFILES_DIRS = [
+    root('static')
+]
 
 MEDIA_URL = '/media/'
 if env('DEBUG'):
@@ -151,11 +152,11 @@ else:
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'kochkorjarnama@gmail.com'
-EMAIL_HOST_PASSWORD = '1qaz@WSX28'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
 
 ADS_PER_PAGE = 10
 
-TELEGRAM_TOKEN = '462585305:AAHk_kLP2kZhpAIA47iKldJuS4sOeJpcYIk'
+TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')

@@ -1,3 +1,6 @@
+from urllib.parse import urljoin
+
+from django.conf import settings
 from django.db import models
 
 from main.media_path import ad_path
@@ -13,8 +16,12 @@ class Category(models.Model):
 
 
 class AdManager(models.Manager):
+
     def get_queryset(self):
-        return super(AdManager, self).get_queryset().filter(is_active=True)
+        return super(AdManager, self).get_queryset().all()
+
+    def active(self, **kwargs):
+        return super().get_queryset().filter(is_active=True, **kwargs)
 
 
 class Ad(models.Model):
@@ -30,7 +37,7 @@ class Ad(models.Model):
     rise_count = models.IntegerField(default=0)
     view_count = models.IntegerField(default=0)
 
-    objects = AdManager
+    objects = AdManager()
 
     class Meta:
         ordering = ['-date_update']
@@ -40,7 +47,6 @@ class Ad(models.Model):
         while True:
             if not self.slug:
                 self.slug = generate_slug(self.title)
-
             try:
                 return super(Ad, self).save()
             except:
@@ -53,6 +59,10 @@ class Ad(models.Model):
     def increment_view(self):
         self.view_count += 1
         return self.view_count
+
+    def first_image(self):
+        img = self.images.first()
+        return img.image.url if img else urljoin(settings.STATIC_URL, 'img/no_image.png')
 
 
 class AdImage(models.Model):

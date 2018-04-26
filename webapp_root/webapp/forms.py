@@ -12,3 +12,11 @@ class CreateAdForm(forms.ModelForm):
         model = Ad
         fields = ('title', 'text', 'category', 'phone1', 'phone2')
 
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Там сатам'}),
+            'text': forms.Textarea(attrs={'placeholder': '5 болмолуу там сатам...'}),
+            'phone1': forms.TextInput(attrs={'placeholder': '0700 123 456'}),
+            'phone2': forms.TextInput(attrs={'placeholder': '0700 123 457'}),
+        }
+
+

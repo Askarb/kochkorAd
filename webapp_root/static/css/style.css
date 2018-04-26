@@ -12,6 +12,15 @@ body {
 .navbar{
     margin: 20px 0;
 }
+.logo{
+    margin-right: 20px;
+}
+.logo h1{
+    font-size: 0;
+}
+.nav-link{
+    font-size: 23px;
+}
 .lang {
     vertical-align: top;
     display: inline-block;
@@ -62,10 +71,13 @@ body {
 }
 .item{
     background-color: #fff;
-    border: 1px solid #0E2231;
+    /*border: 1px solid #0E2231;*/
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 15px;
+}
+.item:nth-child(even){
+    background-color: #c1c1c1;
 }
 .item h2 a{
     color: #00B0E8;

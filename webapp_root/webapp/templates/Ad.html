@@ -46,9 +46,11 @@
                         <span>; {{ object.phone2 }}</span>
                     {% endif %}
                 </p>
-                <span class="category">{% trans 'Category' %}:
-                    <a href="{% url 'webapp:category' object.category.slug %}"> <b>{{ object.category }}</b></a>
-                </span>
+                {% if object.category %}
+                    <span class="category">{% trans 'Category' %}:
+                        <a href="{% url 'webapp:category' object.category.slug %}"> <b>{{ object.category }}</b></a>
+                    </span>
+                {% endif %}
                 <br><br>
             <div class="row">
                 <div class="col-md-3 col-sm-6">
