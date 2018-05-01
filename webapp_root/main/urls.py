@@ -1,6 +1,7 @@
+from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls.static import static
-from django.conf import settings, urls
+from django.conf import settings, urls as handle_erls
 from django.conf.urls.i18n import i18n_patterns
 from django.urls import path, include
 
@@ -12,7 +13,7 @@ urlpatterns = [
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
-    path('', include('webapp.urls', namespace='webapp'))
+    url(r'^', include('webapp.urls', namespace='webapp'))
 )
 
-urls.handler404 = views.BadURLView.as_view()
+handle_erls.handler404 = views.BadURLView.as_view()
