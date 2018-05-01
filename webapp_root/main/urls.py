@@ -16,4 +16,4 @@ urlpatterns += i18n_patterns(
     url(r'^', include('webapp.urls', namespace='webapp'))
 )
 
-handle_erls.handler404 = views.BadURLView.as_view()
+# handle_erls.handler404 = views.BadURLView.as_view()
