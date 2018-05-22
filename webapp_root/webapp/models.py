@@ -64,6 +64,9 @@ class Ad(models.Model):
         img = self.images.first()
         return img.image.url if img else urljoin(settings.STATIC_URL, 'img/no_image.png')
 
+    def __str__(self):
+        return self.title
+
 
 class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images', on_delete=models.CASCADE,)

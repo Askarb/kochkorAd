@@ -1,5 +1,11 @@
+from datetime import datetime
 from django.contrib import admin
 from .models import Category, Ad, AdImage
+
+
+def ad_update(modeladmin, request, queryset):
+    queryset.update(date_update=datetime.now())
+ad_update.short_description = "Rise selected ads"
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -23,6 +29,7 @@ class AdAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     inlines = [AdImageInline, ]
     list_editable = ['is_active']
+    actions = [ad_update]
 
 
 admin.site.register(Category, CategoryAdmin)
