@@ -8,7 +8,7 @@ from django.views.generic import TemplateView, ListView, CreateView, DetailView
 
 from webapp.forms import CreateAdForm
 from webapp.models import Category, Ad, AdImage
-from webapp.utils import send_notification_to_telegram
+from helpers.utils import send_notification_to_telegram
 
 
 class ContextMixin(object):

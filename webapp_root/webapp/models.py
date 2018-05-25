@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import models
 
 from main.media_path import ad_path
-from webapp.utils import generate_slug
+from helpers.utils import generate_slug
 
 
 class Category(models.Model):
