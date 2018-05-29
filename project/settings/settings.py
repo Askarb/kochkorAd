@@ -149,7 +149,7 @@ MEDIA_URL = '/media/'
 if env('DEBUG'):
     MEDIA_ROOT = root('media')
 else:
-    MEDIA_ROOT = os.path.join('/mnt/media/kochkor')
+    MEDIA_ROOT = os.path.join('/home/serv/media/kochkor')
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
