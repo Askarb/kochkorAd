@@ -1,0 +1,10 @@
+{% load staticfiles i18n %}
+
+  <div id="error-page" class="col-md-8 mx-auto text-center">
+    <div class="box">
+      <p class="text-center"><a href="{% url 'webapp:index' %}"><img src="{% static 'img/logo.png' %}" alt="Obaju template"></a></p>
+      <h3>{% trans 'К сожалению данная страница больше не доступна' %}</h3>
+      <h4 class="text-muted">{% trans "Ошибка 404 - Страница не найдена" %}</h4>
+      <p class="buttons"><a href="{% url 'webapp:index' %}" class="btn btn-template-outlined"><i class="fa fa-home"></i> {% trans 'Перейти на главную страницу' %}</a></p>
+    </div>
+  </div>

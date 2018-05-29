@@ -1,0 +1,52 @@
+{% load i18n %}
+{% if ad_list %}
+
+<div class="col-lg-9">
+  <!-- Image box with hover-->
+  <div class="heading">
+    <h2>{{ title }}</h2>
+  </div>
+  <div class="row mb-4">
+
+  {% for ad in ad_list %}
+    <div class="col-lg-4 col-md-6">
+      <div class="box-image-text">
+        <div class="image text-center">
+          <img src="{{ ad.first_image }}"  alt="Кочкор реклама" class="img-fluid">
+          <div class="overlay d-flex align-items-center justify-content-center">
+              <a href="{% url 'webapp:ad' ad.slug %}" class="btn btn-template-outlined-white">
+                  <i class="fa fa-chain"> </i> {% trans 'Открыть' %}
+              </a>
+          </div>
+        </div>
+        <div class="content">
+          <h4><a href="{% url 'webapp:ad' ad.slug %}">{{ ad.title }}</a></h4>
+          <p>{{ ad.text|truncatechars:60 }}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  </div>
+    <div class="row">
+      <div class="col-md-12">
+        <nav aria-label="Page navigation example" class="center">
+
+        <ul class="pager list-unstyled d-flex align-items-center justify-content-between mb-0">
+
+            {% if page_obj.has_previous %}
+              <li class="previous"><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-template-outlined">←</a></li>
+            {% endif %}
+          <li class="center"><a class="btn btn-template-outlined">{{ page_obj.number }} / {{page_obj.paginator.num_pages }}</a></li>
+
+            {% if page_obj.has_next %}
+              <li class="next"><a href="?page={{ page_obj.next_page_number }}" class="btn btn-template-outlined">→</a></li>
+            {% endif %}
+        </ul>
+        </nav>
+      </div>
+  </div>
+</div>
+{% else %}
+    {% include '404.html' %}
+{% endif %}

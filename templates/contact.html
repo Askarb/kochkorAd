@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load i18n widget_tweaks %}
+
+{% block content %}
+
+<section class="bar">
+    <div class="container">
+      <div class="row">
+        {% include 'sidebar.html' %}
+        <div class="col-md-8">
+            <div id="contact" class="container">
+              <section class="bar">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="heading">
+                      <h2>{% trans "Мы здесь чтобы вам помочь" %}</h2>
+                    </div>
+                    <p class="lead">{% trans "У Вас возникли вопросы? позвоните на номер 0500 01 02 05." %}</p>
+                    <p class="text-sm">{% trans "Пожалуйста, не стесняйтесь обращаться к нам, наш центр обслуживания клиентов работает для вас 24/7." %}</p>
+                  </div>
+                </div>
+              </section>
+              <section class="bar pt-0">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="heading text-center">
+                      <h2>{% trans "Форма контактов" %}:</h2>
+                    </div>
+                  </div>
+                  <div class="col-md-8 mx-auto">
+                    <form method="post">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <label for="firstname">{% trans 'Имя' %}:</label>
+                              {{ form.name|add_class:'form-control' }}
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="email">Email ({% trans "Электронная почта" %}):</label>
+                            {{ form.email|add_class:'form-control' }}
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="subject">{% trans "Телефон" %}:</label>
+                            {{ form.phone|add_class:'form-control' }}
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <label for="message">{% trans "Сообщение" %}:</label>
+                            {{ form.message|add_class:'form-control' }}
+                          </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                          <button type="submit" class="btn btn-template-outlined"><i class="fa fa-envelope-o"></i> {% trans "Отправить сообщение" %}</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+      </div>
+    </div>
+</section>
+
+    <div id="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d665.0209945052462!2d75.75545580253653!3d42.21583137479053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2skg!4v1527364541214" width="100%" height="350px" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+{% endblock %}

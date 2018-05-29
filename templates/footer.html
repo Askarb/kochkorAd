@@ -1,0 +1,25 @@
+{% load i18n %}
+<!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h4 class="h6">{% trans 'О сайте' %}</h4>
+          <p>{% trans 'Рекламный сайт для Кочкорского района. Здесь вы можете бесплатно размещать Ваши объявления с фотографиями и без.' %}</p>
+          <hr class="d-block d-lg-none">
+        </div>
+        <div class="col-lg-6">
+          <h4 class="h6">{% trans 'Контакт' %}</h4>
+          <p class="text-uppercase"><strong>{% trans 'Кочкорский район' %}</strong><br>
+              {% blocktrans  %}
+              улица Сагымбая Орозбакова<br>
+                  пересекает ул. Омуров<br>
+              (газетный павильон)
+              {% endblocktrans %}
+          </p>
+            <a href="{% url 'webapp:contact' %}" class="btn btn-template-main">{% trans 'Перейти на страницу контактов' %}</a>
+          <hr class="d-block d-lg-none">
+        </div>
+      </div>
+    </div>
+  </footer>

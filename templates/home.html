@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="bar background-white relative-positioned">
+    <div class="container">
+      <!-- Carousel Start-->
+      <div class="home-carousel">
+        <div class="dark-mask mask-primary"></div>
+        <div class="container">
+          <div class="homepage owl-carousel">
+            {% for slider in sliders %}
+            <div class="item">
+              <div class="row">
+                <div class="col-md-5 text-right">
+{#                      <p><img src="/static/img/logo.png" alt="" class="ml-auto"></p>#}
+                  <h2>{{ slider.title }}</h2>
+                  <p>{{ slider.text|safe }}</p>
+                </div>
+                <div class="col-md-7"><img src="{{ slider.image.url }}" alt="{{ slider.title }}" class="img-fluid"></div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <!-- Carousel End-->
+    </div>
+  </section>
+<section class="bar">
+    <div class="container">
+      <div class="row">
+        {% include 'sidebar.html' %}
+        {% include 'items.html' %}
+      </div>
+    </div>
+</section>
+{% endblock %}

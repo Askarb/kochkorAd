@@ -1,0 +1,18 @@
+{% load appearance i18n %}
+        <div class="col-lg-3">
+          <!-- MENUS AND WIDGETS -->
+          <div class="panel panel-default sidebar-menu with-icons">
+            <div class="panel-heading">
+              <h3 class="h4 panel-title">{% trans 'Категории'  %}</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="nav nav-pills flex-column text-sm">
+                  {% for category in categories %}
+                <li class="nav-item">
+                    <a href="{% url 'webapp:category' category.slug %}" class="nav-link {% if_active_category 'webapp:category' category.slug %}">{{ category.name }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>

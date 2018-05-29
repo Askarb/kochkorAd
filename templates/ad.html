@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<section class="bar">
+    <div class="container">
+      <div class="row">
+        {% include 'sidebar.html' %}
+    {% if object %}
+        <div class="col-md-8">
+        {% if object.images %}
+          <section>
+            <div class="project owl-carousel">
+                {% for image in object.images.all %}
+                  <div class="item"><img src="{{ image.image.url }}" alt="{{ object.title }}" class="img-fluid"></div>
+                {% endfor %}
+            </div>
+          </section>
+        {% endif %}
+          <section class="bar">
+            <div class="row portfolio-project">
+              <div class="col-md-8">
+              {% if object.title %}
+                <div class="heading">
+                  <h2>{{ object.title }}</h2>
+                </div>
+              {% endif %}
+              <p>{{ object.text }}</p>
+              </div>
+              <div class="col-md-4 project-more">
+                <div class="heading">
+                  <h3></h3>
+                </div>
+                <h4>{% trans 'Телефон' %}</h4>
+                <p><strong>{{ object.phone1 }}</strong></p>
+                <p><strong>{{ object.phone2 }}</strong></p>
+                {% if object.category %}
+                  <h4>{% trans 'Категория' %}</h4>
+                  <p>
+                      <a href="{% url 'webapp:category' object.category.slug %}">
+                          <b>{{ object.category }}</b>
+                      </a>
+                  </p>
+                {% endif %}
+{#                <h4>Dates</h4>#}
+{#                <p>10/2013 - 06/2014</p>#}
+              </div>
+            </div>
+          </section>
+        </div>
+    {% else %}
+        {% include '404.html' %}
+    {% endif %}
+      </div>
+    </div>
+</section>
+{% endblock %}
