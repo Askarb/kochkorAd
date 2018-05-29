@@ -93,5 +93,10 @@
         });
     </script>
     {% endif %}
+
+  {% if not request.debug %}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107668524-1"></script>
+      <script src="{% static 'js/analytics.js' %}"></script>
+  {% endif %}
   </body>
 </html>

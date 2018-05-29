@@ -1,4 +1,4 @@
-from django.conf import settings
+from project import settings
 
 from applications.webapp.models import Variable
 

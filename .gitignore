@@ -6,4 +6,5 @@ venv
 *.mo
 media/
 .env
+staticfiles
 
