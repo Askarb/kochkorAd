@@ -3,12 +3,12 @@
   <footer class="main-footer">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <h4 class="h6">{% trans 'О сайте' %}</h4>
           <p>{% trans 'Рекламный сайт для Кочкорского района. Здесь вы можете бесплатно размещать Ваши объявления с фотографиями и без.' %}</p>
           <hr class="d-block d-lg-none">
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <h4 class="h6">{% trans 'Контакт' %}</h4>
           <p class="text-uppercase"><strong>{% trans 'Кочкорский район' %}</strong><br>
               {% blocktrans  %}
@@ -20,6 +20,9 @@
             <a href="{% url 'webapp:contact' %}" class="btn btn-template-main">{% trans 'Перейти на страницу контактов' %}</a>
           <hr class="d-block d-lg-none">
         </div>
+      <div class="col-lg-4">
+          <div class="fb-like" data-href="https://web.facebook.com/KochkorCITY/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
+      </div>
       </div>
     </div>
   </footer>
