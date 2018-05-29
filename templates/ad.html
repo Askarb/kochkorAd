@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n social_share staticfiles %}
+
+{% block meta %}
+    <meta property="og:url"                content="{{ request.site_url }}{% url 'webapp:ad' object.slug %}" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="{{ object.title }}" />
+    <meta property="og:description"        content="{{ object.text }}" />
+    {% if object.images %}
+        <meta property="og:image"              content="http://kochkorcity.kg{{ object.images.first.image.url }}" />
+    {% endif %}
+{% endblock %}
+
 
 {% block content %}
 
@@ -27,6 +38,18 @@
                 </div>
               {% endif %}
               <p>{{ object.text }}</p>
+              <p>
+                  <div
+        class="fb-share-button"
+        data-href="{{ request.site_url }}{% url 'webapp:ad' object.slug %}"
+        data-layout="button_count"
+        data-size="large"
+        data-mobile-iframe="true">
+    <a target="_blank"
+       href="https://www.facebook.com/sharer/sharer.php?u={{ request.site_url }}{% url 'webapp:ad' object.slug %}&amp;src=sdkpreparse"
+       class="fb-xfbml-parse-ignore">Share</a>
+</div>
+              </p>
               </div>
               <div class="col-md-4 project-more">
                 <div class="heading">
@@ -43,6 +66,8 @@
                       </a>
                   </p>
                 {% endif %}
+
+
 {#                <h4>Dates</h4>#}
 {#                <p>10/2013 - 06/2014</p>#}
               </div>
@@ -55,4 +80,9 @@
       </div>
     </div>
 </section>
+     <div id="fb-root"></div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/fb.js' %}"></script>
 {% endblock %}

@@ -25,10 +25,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+
     'widget_tweaks',
-    'applications.webapp',
     'ckeditor',
     'sorl.thumbnail',
+    'social_django',
+    'django_social_share',
+    
+    'applications.webapp',
 ]
 
 MIDDLEWARE = [
@@ -41,7 +45,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'applications.webapp.middleware.WebappMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 ROOT_URLCONF = 'project.urls'
 
@@ -59,6 +72,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -155,3 +170,12 @@ TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
 
 INSTAGRAM_USERNAME = env('INSTAGRAM_USERNAME')
 INSTAGRAM_PASSWORD = env('INSTAGRAM_PASSWORD')
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
+SOCIAL_AUTH_FACEBOOK_KEY = env('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = env('SOCIAL_AUTH_FACEBOOK_SECRET')
+
+SITE_URL = 'http://kochkorcity.kg'

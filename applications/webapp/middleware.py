@@ -10,5 +10,6 @@ class WebappMiddleware(object):
 
     def __call__(self, request, *args, **kwargs):
         request.debug = settings.DEBUG
+        request.site_url = settings.SITE_URL
         request.email = Variable.objects.get(name='email').value
         return self.response(request)

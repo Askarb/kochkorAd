@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+      {% block js %}{% endblock %}
+
+    {% block meta %}{% endblock %}
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
     <!-- Font Awesome CSS-->
@@ -79,6 +82,7 @@
     <script src="{% static 'vendor/jquery.scrollto/jquery.scrollTo.min.js' %}"></script>
     <script src="{% static 'js/notify.js' %}"></script>
     <script src="{% static 'js/front.js' %}"></script>
+
     {% if messages %}
     <script>
         $(document).ready(function () {
