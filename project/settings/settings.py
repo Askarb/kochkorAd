@@ -41,7 +41,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-    'webapp.middleware.WebappMiddleware',
+    'applications.webapp.middleware.WebappMiddleware',
 ]
 if not DEBUG:
     INSTALLED_APPS += ['opbeat.contrib.django']
