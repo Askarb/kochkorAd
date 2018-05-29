@@ -40,17 +40,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'applications.webapp.middleware.WebappMiddleware',
 ]
-if not DEBUG:
-    INSTALLED_APPS += ['opbeat.contrib.django']
-
-    OPBEAT = {
-        'ORGANIZATION_ID': env('OPBEAT_ORGANIZATION_ID'),
-        'APP_ID': env('OPBEAT_APP_ID'),
-        'SECRET_TOKEN': env('OPBEAT_SECRET_TOKEN'),
-    }
 
 ROOT_URLCONF = 'project.urls'
 
