@@ -23,7 +23,7 @@ class AdManager(models.Manager):
         return super(AdManager, self).get_queryset().all()
 
     def active(self, **kwargs):
-        return super().get_queryset().filter(is_active=True, **kwargs)
+        return super().get_queryset().filter(is_active=True, **kwargs).order_by('-date_update', '-date_create')
 
 
 class Ad(models.Model):

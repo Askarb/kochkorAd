@@ -22,7 +22,7 @@ class AdAdmin(admin.ModelAdmin):
 
     actions_on_top = True
     save_on_top = True
-    list_display = ['title', 'category', 'date_create', 'phone1', 'phone2', 'is_active',
+    list_display = ['title', 'category', 'date_create', 'date_update', 'phone1', 'phone2', 'is_active',
                     'rise_count', 'view_count']
     search_fields = ('title', 'phone1', 'phone2')
     list_filter = ['is_active', 'category']
