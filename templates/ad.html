@@ -7,13 +7,15 @@
     <meta property="og:title"              content="{{ object.title }}" />
     <meta property="og:description"        content="{{ object.text }}" />
     {% if object.images %}
-        <meta property="og:image"              content="http://kochkorcity.kg{{ object.images.first.image.url }}" />
+        <meta property="og:image" content="http://kochkorcity.kg{{ object.images.first.image.url }}" />
+    {% else %}
+        <meta property="og:image" content="http://kochkorcity.kg{% static 'img/img_for_social.png' %}" />
     {% endif %}
 {% endblock %}
 
 
 {% block content %}
-
+<h1>http://kochkorcity.kg{% static 'img/img_for_social.png' %}</h1>
 <section class="bar">
     <div class="container">
       <div class="row">
