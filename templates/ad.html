@@ -6,7 +6,7 @@
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="{{ object.title }}" />
     <meta property="og:description"        content="{{ object.text }}" />
-    {% if object.images %}
+    {% if object.images.first %}
         <meta property="og:image" content="http://kochkorcity.kg{{ object.images.first.image.url }}" />
     {% else %}
         <meta property="og:image" content="http://kochkorcity.kg{% static 'img/img_for_social.png' %}" />
