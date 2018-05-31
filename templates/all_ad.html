@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="bar">
+    <div class="container">
+      <div class="row">
+        {% include 'sidebar.html' %}
+        {% include 'items.html' %}
+      </div>
+    </div>
+</section>
+{% endblock %}

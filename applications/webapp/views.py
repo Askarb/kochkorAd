@@ -1,11 +1,9 @@
-from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views import View
-from django.views.generic import TemplateView, ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView
 
 from applications.webapp.forms import CreateAdForm, MessageCreateForm
 from applications.webapp.models import Category, Ad, AdImage, Slider, Message
@@ -18,7 +16,6 @@ class ContextMixin(object):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
-        context['title'] = _('Последние объявления')
         return context
 
 
@@ -30,6 +27,21 @@ class HomeView(ContextMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['sliders'] = Slider.objects.filter(active=True)
+        context['title'] = _('Последние объявления')
+        return context
+
+    def get_queryset(self):
+        return Ad.objects.active()
+
+
+class AllAdView(ContextMixin, ListView):
+    template_name = 'all_ad.html'
+    model = Ad
+    paginate_by = ADS_PER_PAGE
+
+    def get_context_data(self, **kwargs):
+        context = super(AllAdView, self).get_context_data(**kwargs)
+        context['title'] = _('Все объявления')
         return context
 
     def get_queryset(self):
@@ -74,7 +86,6 @@ class RiseAdView(View):
     def post(self, *args, **kwargs):
         try:
             ad = Ad.objects.get(pk=kwargs['pk'])
-            ad.date_update = timezone.now()
             ad.increment_raise()
             messages.add_message(self.request, messages.SUCCESS, self.success_message)
         except Ad.DoesNotExist:
