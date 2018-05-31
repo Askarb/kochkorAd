@@ -43,7 +43,8 @@ class AdView(ContextMixin, DetailView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
-        self.object.increment_view()
+        if not self.request.user.is_superuser:
+            self.object.increment_view()
         return self.render_to_response(context)
 
 
