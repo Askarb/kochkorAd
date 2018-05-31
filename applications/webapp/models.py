@@ -1,6 +1,7 @@
 from urllib.parse import urljoin
 
 from ckeditor.fields import RichTextField
+from datetime import datetime
 from django.conf import settings
 from django.db import models
 from sorl.thumbnail import get_thumbnail
@@ -48,6 +49,9 @@ class Ad(models.Model):
         if not self.title:
             self.title = self.text[:20]
 
+        if not self.date_update:
+            self.date_update = datetime.now()
+
         while True:
             if not self.slug:
                 self.slug = generate_slug(self.title)
@@ -58,6 +62,7 @@ class Ad(models.Model):
 
     def increment_raise(self):
         self.rise_count += 1
+        self.date_create = datetime.now()
         self.save()
         return self.rise_count
 
