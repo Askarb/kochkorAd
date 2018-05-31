@@ -13,4 +13,5 @@ class WebappMiddleware(object):
         request.site_url = settings.SITE_URL
         request.fb_app_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
         request.email = Variable.objects.get(name='email').value
+        request.whatsapp = settings.WHATSAPP_NUMBER
         return self.response(request)

@@ -13,7 +13,9 @@
                     <div class="heading">
                       <h5>{% trans "" %}</h5>
                       <p class="lead">{% trans 'Заполните форму и нажмите на кнопку "Создать объявление"' %}</p>
-
+                        <p class="lead">{% trans "Если возникли вопросы напишите нам в WhatsApp " %}
+                            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ request.whatsapp }}">{% trans "Открыть WtatsApp" %}</a>
+                        </p>
                     </div>
                   </div>
                 </div>
