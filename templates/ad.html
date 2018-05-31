@@ -6,6 +6,7 @@
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="{{ object.title }}" />
     <meta property="og:description"        content="{{ object.text }}" />
+    <meta property="fb:app_id"             content="{{ request.fb_app_id }}" />
     {% if object.images.first %}
         <meta property="og:image" content="http://kochkorcity.kg{{ object.images.first.image.url }}" />
     {% else %}
@@ -33,25 +34,30 @@
           <section class="bar">
             <div class="row portfolio-project">
               <div class="col-md-8">
-              {% if object.title %}
-                <div class="heading">
-                  <h2>{{ object.title }}</h2>
-                </div>
-              {% endif %}
-              <p>{{ object.text }}</p>
-              <p>
+                  {% if object.title %}
+                    <div class="heading">
+                      <h2>{{ object.title }}</h2>
+                    </div>
+                  {% endif %}
+                  <p>{{ object.text }}</p>
                   <div
-        class="fb-share-button"
-        data-href="{{ request.site_url }}{% url 'webapp:ad' object.slug %}"
-        data-layout="button_count"
-        data-size="large"
-        data-mobile-iframe="true">
-    <a target="_blank"
-       href="https://www.facebook.com/sharer/sharer.php?u={{ request.site_url }}{% url 'webapp:ad' object.slug %}&amp;src=sdkpreparse"
-       class="fb-xfbml-parse-ignore">Share</a>
-</div>
-              </p>
-              <div class="fb-like" data-href="https://web.facebook.com/KochkorCITY/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
+                        class="fb-share-button"
+                        data-href="{{ request.site_url }}{% url 'webapp:ad' object.slug %}"
+                        data-layout="button_count"
+                        data-size="large"
+                        data-mobile-iframe="true">
+                    <a target="_blank"
+                       href="https://www.facebook.com/sharer/sharer.php?u={{ request.site_url }}{% url 'webapp:ad' object.slug %}&amp;src=sdkpreparse"
+                       class="fb-xfbml-parse-ignore">Share</a>
+                  </div>
+                  <div class="fb-like" data-href="https://web.facebook.com/KochkorCITY/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
+
+                  <p>
+                    <form action="{% url 'webapp:rise_ad' object.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-primary">{% trans 'Поднять объявление' %}</button><br>
+                    </form>
+                  </p>
               </div>
               <div class="col-md-4 project-more">
                 <div class="heading">

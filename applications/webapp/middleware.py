@@ -11,5 +11,6 @@ class WebappMiddleware(object):
     def __call__(self, request, *args, **kwargs):
         request.debug = settings.DEBUG
         request.site_url = settings.SITE_URL
+        request.fb_app_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
         request.email = Variable.objects.get(name='email').value
         return self.response(request)

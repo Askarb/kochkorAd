@@ -59,10 +59,12 @@ class Ad(models.Model):
     def increment_raise(self):
         self.rise_count += 1
         self.save()
+        return self.rise_count
 
     def increment_view(self):
         self.view_count += 1
         self.save()
+        return self.view_count
 
     def first_image(self):
         img = self.images.first()

@@ -40,6 +40,12 @@ class AdView(ContextMixin, DetailView):
     template_name = 'ad.html'
     model = Ad
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        self.object.increment_view()
+        return self.render_to_response(context)
+
 
 class CategoryView(ContextMixin, ListView):
     template_name = 'category.html'
@@ -56,6 +62,7 @@ class CategoryView(ContextMixin, ListView):
 
 
 class RiseAdView(View):
+    success_message = _('Объявление успешно поднята!')
 
     def get(self, *args, **kwargs):
         try:
@@ -67,8 +74,8 @@ class RiseAdView(View):
         try:
             ad = Ad.objects.get(pk=kwargs['pk'])
             ad.date_update = timezone.now()
-            ad.rise_count += 1
-            ad.save()
+            ad.increment_raise()
+            messages.add_message(self.request, messages.SUCCESS, self.success_message)
         except Ad.DoesNotExist:
             pass
         return HttpResponseRedirect(self.request.META['HTTP_REFERER'])
@@ -78,7 +85,7 @@ class CreateAdView(ContextMixin, CreateView):
     template_name = 'ad_create.html'
     form_class = CreateAdForm
     model = Ad
-    success_message = 'Объявление успешно создана!'
+    success_message = _('Объявление успешно создана!')
 
     def form_valid(self, form):
         form = form.save()
@@ -95,7 +102,7 @@ class ContactView(ContextMixin, CreateView):
     template_name = 'contact.html'
     model = Message
     form_class = MessageCreateForm
-    success_message = 'Сообщение успешно отправлено!'
+    success_message = _('Сообщение успешно отправлено!')
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, self.success_message)
