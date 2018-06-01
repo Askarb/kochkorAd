@@ -1,4 +1,4 @@
-from project import settings
+from main import settings
 
 from applications.webapp.models import Variable
 

@@ -1,0 +1,55 @@
+{% load i18n staticfiles appearance %}
+<!-- Top bar-->
+<div class="top-bar">
+<div class="container">
+  <div class="row d-flex align-items-center">
+    <div class="col-md-6 d-md-block d-none">
+      <p>{% trans 'Свяжитесь с нами' %} 0500 01 02 05   {% trans 'или' %} {{ request.email }}</p>
+    </div>
+    <div class="col-md-6">
+      <div class="d-flex justify-content-md-end justify-content-between">
+        <ul class="list-inline contact-info d-block d-md-none">
+          <li class="list-inline-item"><a href="#"><i class="fa fa-phone"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+        </ul>
+{#        <div class="login">#}
+{#            {% if user.is_anonymous %}#}
+{#            <a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn">#}
+{#                <i class="fa fa-sign-in"></i>#}
+{#                <span class="d-none d-md-inline-block">{% trans 'Войти' %}</span>#}
+{#            </a>#}
+{#            <a href="customer-register.html" class="signup-btn">#}
+{#                <i class="fa fa-user"></i><span class="d-none d-md-inline-block">{% trans 'Зарегистрироваться' %}</span>#}
+{#            </a>#}
+{#            {% endif %}#}
+{#        </div>#}
+        <ul class="social-custom list-inline">
+          <li class="list-inline-item"><a href="https://web.facebook.com/KochkorCITY/"><i class="fa fa-facebook"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Top bar end-->
+
+<!-- Navbar Start-->
+  <header class="nav-holder make-sticky">
+    <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
+      <div class="container">
+          <a href="{% url 'webapp:index' %}" class="navbar-brand home">
+              <img src="{% static 'img/logo.png' %}" alt="Universal logo" class="d-none d-md-inline-block"><img src="{% static 'img/logo.png' %}" alt="{% trans 'Кочкор Реклама' %}" class="d-inline-block d-md-none">
+              <span class="sr-only">{% trans 'Кочкор - перейти на главную cтраницу' %}</span>
+          </a>
+        <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
+        <div id="navigation" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item {% highlight_if_active 'webapp:index' %} "><a href="{% url 'webapp:index' %}" class="dropdown">{% trans 'Главная' %}</a></li>
+            <li class="nav-item {% highlight_if_active 'webapp:ad_create' %}"><a href="{% url 'webapp:ad_create' %}" class="dropdown">{% trans 'Создать объявление' %}</a></li>
+            <li class="nav-item {% highlight_if_active 'webapp:contact' %}"><a href="{% url 'webapp:contact' %}" class="dropdown">{% trans 'Контакт' %}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+      <!-- Navbar End-->

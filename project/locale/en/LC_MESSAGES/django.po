@@ -1,0 +1,285 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: templates/ad_create.html:14
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-01 11:41+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applications/auto/models.py:7 applications/auto/models.py:8
+msgid "Кочкор"
+msgstr ""
+
+#: applications/auto/models.py:7 applications/auto/models.py:8
+msgid "Бишкек"
+msgstr ""
+
+#: applications/auto/models.py:12
+msgid "Точное время"
+msgstr ""
+
+#: applications/auto/models.py:13
+msgid "час"
+msgstr ""
+
+#: applications/auto/models.py:14 applications/auto/models.py:15
+msgid "часа"
+msgstr ""
+
+#: applications/auto/models.py:16 applications/auto/models.py:17
+msgid "часов"
+msgstr ""
+
+#: applications/auto/models.py:18
+msgid "В течении дня"
+msgstr ""
+
+#: applications/auto/models.py:22
+msgid "Пешеход"
+msgstr ""
+
+#: applications/auto/models.py:23
+msgid "Попутчик"
+msgstr ""
+
+#: applications/auto/models.py:27
+msgid "Вы кто?"
+msgstr ""
+
+#: applications/auto/models.py:28
+msgid "Точность"
+msgstr ""
+
+#: applications/auto/models.py:29
+msgid "Дата"
+msgstr ""
+
+#: applications/auto/models.py:30
+msgid "Маршрут"
+msgstr ""
+
+#: applications/auto/models.py:31 applications/auto/models.py:32
+#: templates/ad.html:66 templates/ad_create.html:55 templates/ad_create.html:61
+#: templates/contact.html:50
+msgid "Телефон"
+msgstr "Phone"
+
+#: applications/auto/models.py:33
+msgid "Дата создания"
+msgstr ""
+
+#: applications/auto/models.py:34
+msgid "Количество мест/пассажиров"
+msgstr ""
+
+#: applications/auto/models.py:35
+msgid "Цена"
+msgstr ""
+
+#: applications/webapp/views.py:30
+msgid "Последние объявления"
+msgstr "Latest ads"
+
+#: applications/webapp/views.py:44 templates/sidebar.html:11
+msgid "Все объявления"
+msgstr "All ads"
+
+#: applications/webapp/views.py:73
+msgid "Реклама по категориям"
+msgstr "Ad by category"
+
+#: applications/webapp/views.py:78
+msgid "Объявление успешно поднята!"
+msgstr "Ad successfully raised"
+
+#: applications/webapp/views.py:100
+msgid "Объявление успешно создана!"
+msgstr "Ad successfully created"
+
+#: applications/webapp/views.py:117
+msgid "Сообщение успешно отправлено!"
+msgstr "Message successfully sent"
+
+#: main/settings/settings.py:112
+msgid "Russian"
+msgstr ""
+
+#: main/settings/settings.py:113
+msgid "Kyrgyz"
+msgstr ""
+
+#: main/settings/settings.py:114
+msgid "English"
+msgstr ""
+
+#: templates/404.html:6
+msgid "К сожалению данная страница больше не доступна"
+msgstr "We are sorry - this page is not here anymore"
+
+#: templates/404.html:7
+msgid "Ошибка 404 - Страница не найдена"
+msgstr "Error 404 - Page not found"
+
+#: templates/404.html:8
+msgid "Перейти на главную страницу"
+msgstr "Go to home page"
+
+#: templates/ad.html:58
+msgid "Поднять объявление"
+msgstr "Rise ad"
+
+#: templates/ad.html:70 templates/ad_create.html:43 templates/category.html:4
+msgid "Категория"
+msgstr "Category"
+
+#: templates/ad_create.html:15
+#, fuzzy
+#| msgid "Заполните форму и нажмите на кнопку \"Создать объявление\""
+msgid "Заполните форму и нажмите на кнопку \"Создать объявление\""
+msgstr "Fill the form and press the button \"Create ad\""
+
+#: templates/ad_create.html:16
+msgid "Если возникли вопросы напишите нам в WhatsApp "
+msgstr ""
+
+#: templates/ad_create.html:17 templates/contact.html:19
+msgid "Открыть WtatsApp"
+msgstr "Open WhatsApp"
+
+#: templates/ad_create.html:28
+msgid "Форма объявления"
+msgstr "Create ad form"
+
+#: templates/ad_create.html:37
+msgid "Заголовок"
+msgstr "Title"
+
+#: templates/ad_create.html:49
+msgid "Текст"
+msgstr "Text"
+
+#: templates/ad_create.html:67
+msgid "Загрузите фотографии"
+msgstr "Upload photo"
+
+#: templates/ad_create.html:72 templates/navbar.html:48
+msgid "Создать объявление"
+msgstr "Create ad"
+
+#: templates/contact.html:16
+msgid "Мы здесь чтобы вам помочь"
+msgstr "We are here to help you"
+
+#: templates/contact.html:18
+msgid ""
+"У Вас возникли вопросы? позвоните на номер 0500 01 02 05 или напишите нам в "
+"WhatsApp"
+msgstr ""
+"Do you have any question? call us +996500010205 or write us via Whatasapp"
+
+#: templates/contact.html:21
+msgid ""
+"Пожалуйста, не стесняйтесь обращаться к нам, наш центр обслуживания клиентов "
+"работает для вас 24/7."
+msgstr ""
+"Please feel free to contact us, our customer service center is working for "
+"you 24/7."
+
+#: templates/contact.html:29
+msgid "Форма контактов"
+msgstr "Contact form"
+
+#: templates/contact.html:38
+msgid "Имя"
+msgstr "Name"
+
+#: templates/contact.html:44
+msgid "Электронная почта"
+msgstr "Emal"
+
+#: templates/contact.html:56
+msgid "Сообщение"
+msgstr "Message"
+
+#: templates/contact.html:61
+msgid "Отправить сообщение"
+msgstr "Send message"
+
+#: templates/footer.html:7
+msgid "О сайте"
+msgstr "About site"
+
+#: templates/footer.html:8
+msgid ""
+"Рекламный сайт для Кочкорского района. Здесь вы можете бесплатно размещать "
+"Ваши объявления с фотографиями и без."
+msgstr ""
+"Advertising site for Kochkor district. Here you can post your ads for free "
+"with photos and without."
+
+#: templates/footer.html:12 templates/navbar.html:49
+msgid "Контакт"
+msgstr "Contact"
+
+#: templates/footer.html:13
+msgid "Кочкорский район"
+msgstr "Kochkor district"
+
+#: templates/footer.html:14
+msgid ""
+"\n"
+"              улица Сагымбая Орозбакова<br>\n"
+"                  пересекает ул. Омуров<br>\n"
+"              (газетный павильон)\n"
+"              "
+msgstr ""
+"\n"
+"              Sagymbai Orozbakov st.<br>\n"
+"                  crossing the st Omurov<br>\n"
+"              (newsstand)\n"
+"              "
+
+#: templates/footer.html:20
+msgid "Перейти на страницу контактов"
+msgstr "Go to contact page"
+
+#: templates/items.html:18
+msgid "Открыть"
+msgstr "Open"
+
+#: templates/navbar.html:7
+msgid "Свяжитесь с нами"
+msgstr "Contact us"
+
+#: templates/navbar.html:7
+msgid "или"
+msgstr "or"
+
+#: templates/navbar.html:41
+msgid "Кочкор Реклама"
+msgstr "Kochkor Ad"
+
+#: templates/navbar.html:42
+msgid "Кочкор - перейти на главную cтраницу"
+msgstr "Kochkor - go to main page"
+
+#: templates/navbar.html:47
+msgid "Главная"
+msgstr "Main"
+
+#: templates/sidebar.html:6
+msgid "Категории"
+msgstr "Categories"
