@@ -18,6 +18,8 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['kochkorcity.kg'])
 
 INSTALLED_APPS = [
     'jet',
+    'modeltranslation',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -108,11 +110,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGES = [
+LANGUAGES = (
     ('ru', _('Russian')),
     ('ky', _('Kyrgyz')),
     ('en', _('English')),
-]
+)
 
 LANGUAGE_CODE = 'ru'
 
@@ -133,6 +135,11 @@ EXTRA_LANG_INFO = {
 LANG_INFO = django.conf.locale.LANG_INFO.copy()
 LANG_INFO.update(EXTRA_LANG_INFO)
 django.conf.locale.LANG_INFO = LANG_INFO
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
+# MODELTRANSLATION_LANGUAGES = ('en', 'ky', 'ru')
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('en', 'ky', 'ru')
+
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -180,4 +187,4 @@ SOCIAL_AUTH_FACEBOOK_SECRET = env('SOCIAL_AUTH_FACEBOOK_SECRET')
 
 SITE_URL = 'http://kochkorcity.kg'
 
-WHATSAPP_NUMBER = '996500010205'
+WHATSAPP_NUMBER = '996772885381'

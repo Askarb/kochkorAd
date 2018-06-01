@@ -83,7 +83,14 @@
     <script src="{% static 'js/notify.js' %}"></script>
     <script src="{% static 'js/front.js' %}"></script>
     <script src="{% static 'js/fb.js' %}"></script>
-
+    <script>
+        $('.dropdown').on('show.bs.dropdown', function () {
+            $(this).find('.dropdown-menu').first().stop(true, true).fadeIn(100);
+        });
+        $('.dropdown').on('hide.bs.dropdown', function () {
+            $(this).find('.dropdown-menu').first().stop(true, true).fadeOut(100);
+        });
+    </script>
     {% if messages %}
     <script>
         $(document).ready(function () {

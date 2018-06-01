@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 11:41+0600\n"
+"POT-Creation-Date: 2018-06-02 00:51+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,15 +112,15 @@ msgstr "Жарнама ийгиликтүү түзүлдү"
 msgid "Сообщение успешно отправлено!"
 msgstr "Катыныз ийгиликтүү жөнөтүлдү"
 
-#: main/settings/settings.py:112
+#: main/settings/settings.py:114
 msgid "Russian"
 msgstr "Орусча"
 
-#: main/settings/settings.py:113
+#: main/settings/settings.py:115
 msgid "Kyrgyz"
 msgstr "Кыргызча"
 
-#: main/settings/settings.py:114
+#: main/settings/settings.py:116
 msgid "English"
 msgstr "Англисче"
 
@@ -182,15 +182,18 @@ msgstr "Биз бул жакта сиздерге жардам берүү үчү
 
 #: templates/contact.html:18
 msgid ""
-"У Вас возникли вопросы? позвоните на номер 0500 01 02 05 или напишите нам в "
+"У Вас возникли вопросы? позвоните на номер 0772 88 53 81 или напишите нам в "
 "WhatsApp"
-msgstr "Эгер сурооңуздар болсо 0500 01 02 05 номуруна чалыңыздар же WhatsApp тан жазыңыздар"
+msgstr ""
+"Эгер сурооңуздар болсо 0772 88 53 81 номуруна чалыңыздар же WhatsApp тан "
+"жазыңыздар"
 
 #: templates/contact.html:21
 msgid ""
 "Пожалуйста, не стесняйтесь обращаться к нам, наш центр обслуживания клиентов "
 "работает для вас 24/7."
-msgstr "Кардар тейлоо борборуна кайрылыңыздар, сиздер учун 7 кун 24 саат иштейт."
+msgstr ""
+"Кардар тейлоо борборуна кайрылыңыздар, сиздер учун 7 кун 24 саат иштейт."
 
 #: templates/contact.html:29
 msgid "Форма контактов"
@@ -220,7 +223,9 @@ msgstr "Сайт жөнүндө"
 msgid ""
 "Рекламный сайт для Кочкорского района. Здесь вы можете бесплатно размещать "
 "Ваши объявления с фотографиями и без."
-msgstr "Кочкор району боюнча жарнама сайты. Бул жактан Сиздер бекер жарнамаңыздарды суроттору менен жайгаштыра аласыздар"
+msgstr ""
+"Кочкор району боюнча жарнама сайты. Бул жактан Сиздер бекер жарнамаңыздарды "
+"суроттору менен жайгаштыра аласыздар"
 
 #: templates/footer.html:12 templates/navbar.html:49
 msgid "Контакт"
@@ -250,7 +255,7 @@ msgstr "Байланыш баракчасына өтүү"
 
 #: templates/items.html:18
 msgid "Открыть"
-msgstr "Ач"
+msgstr "Жарнама көрүү"
 
 #: templates/navbar.html:7
 msgid "Свяжитесь с нами"

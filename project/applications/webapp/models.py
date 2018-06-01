@@ -11,7 +11,7 @@ from applications.helpers.utils import generate_slug
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=255, verbose_name='Link', unique=True)
 
     def __str__(self):

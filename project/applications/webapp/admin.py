@@ -1,5 +1,7 @@
 from datetime import datetime
 from django.contrib import admin
+from modeltranslation.admin import TabbedTranslationAdmin
+
 from .models import Category, Ad, AdImage, Slider, Message, Variable
 
 
@@ -8,8 +10,9 @@ def ad_update(modeladmin, request, queryset):
 ad_update.short_description = "Rise selected ads"
 
 
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug']
+class CategoryAdmin(TabbedTranslationAdmin):
+    list_display = ['pk', 'name', 'name_ru', 'name_ky', 'name_en', 'slug']
+    list_display_links = ('pk', 'name')
     prepopulated_fields = {"slug": ("name",)}
 
 

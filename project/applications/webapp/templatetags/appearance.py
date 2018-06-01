@@ -1,5 +1,5 @@
 from django import template
-# from django.core.urlresolvers import resolve
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.urls import resolve
 
 register = template.Library()
@@ -21,3 +21,11 @@ def highlight_if_active(context, url_name):
         return 'active'
     return ''
 
+
+@register.simple_tag
+def flag(code):
+    if not isinstance(code, str):
+        return code
+
+    code = code.upper()
+    return static(f'img/flags/{code}.svg')
