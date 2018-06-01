@@ -28,4 +28,4 @@ def flag(code):
         return code
 
     code = code.upper()
-    return static(f'img/flags/{code}.svg')
+    return static('img/flags/{0}.svg'.format(code))
