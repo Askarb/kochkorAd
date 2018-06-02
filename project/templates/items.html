@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="content">
-          <h4><a href="{% url 'webapp:ad' ad.slug %}">{{ ad.title }}</a></h4>
+          <h4><a href="{% url 'webapp:ad' ad.slug %}">{{ ad.title|truncatechars:40 }}</a></h4>
           <p>{{ ad.text|truncatechars:60 }}</p>
         </div>
       </div>
