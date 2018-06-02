@@ -3,6 +3,11 @@
 <html>
   <head>
     <meta charset="utf-8">
+
+    {% for i in meta %}
+        <meta name="{{ i.0 }}" content="{{ i.1 }}">
+    {% endfor %}
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Кочкор реклама</title>
     <meta name="description" content="">

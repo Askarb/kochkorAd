@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic import ListView, CreateView, DetailView
 
 from applications.webapp.forms import CreateAdForm, MessageCreateForm
-from applications.webapp.models import Category, Ad, AdImage, Slider, Message
+from applications.webapp.models import Category, Ad, AdImage, Slider, Message, Variable
 from applications.helpers.utils import send_notification_to_telegram
 from main.settings import ADS_PER_PAGE
 
@@ -16,6 +16,11 @@ class ContextMixin(object):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
+        context['meta'] =[
+            ['title', Variable.objects.get(name='meta_title').value],
+            ['description', Variable.objects.get(name='meta_description').value],
+            ['keywords', Variable.objects.get(name='meta_keywords').value],
+        ]
         return context
 
 
