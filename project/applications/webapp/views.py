@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.views.generic import ListView, CreateView, DetailView
+from django.views.i18n import set_language
 
 from applications.webapp.forms import CreateAdForm, MessageCreateForm
 from applications.webapp.models import Category, Ad, AdImage, Slider, Message, Variable
@@ -124,3 +126,14 @@ class ContactView(ContextMixin, CreateView):
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, self.success_message)
         return self.request.META['HTTP_REFERER']
+
+
+def change_language(request):
+    if not request.POST:
+        return redirect('/')
+
+    # if request.user.is_authenticated:
+    #     user = User.objects.db_manager(using='auth').get(id=request.user.profile.account_id)
+    #     user.language = request.POST.get('language', 'en')
+    #     user.save()
+    return set_language(request)

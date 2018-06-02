@@ -73,6 +73,12 @@
         {% endblock %}
       {% include 'footer.html' %}
     </div>
+
+    <form class="language_form" action="{% url 'change_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.no_lang_path }}"/>
+        <input type="hidden" name="language">
+    </form>
     <!-- Javascript files-->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/popper.js/umd/popper.min.js' %}"> </script>
@@ -87,15 +93,8 @@
     <script src="{% static 'vendor/jquery.scrollto/jquery.scrollTo.min.js' %}"></script>
     <script src="{% static 'js/notify.js' %}"></script>
     <script src="{% static 'js/front.js' %}"></script>
-    <script src="{% static 'js/fb.js' %}"></script>
-    <script>
-        $('.dropdown').on('show.bs.dropdown', function () {
-            $(this).find('.dropdown-menu').first().stop(true, true).fadeIn(100);
-        });
-        $('.dropdown').on('hide.bs.dropdown', function () {
-            $(this).find('.dropdown-menu').first().stop(true, true).fadeOut(100);
-        });
-    </script>
+    <script src="{% static 'js/main.js' %}"></script>
+
     {% if messages %}
     <script>
         $(document).ready(function () {
