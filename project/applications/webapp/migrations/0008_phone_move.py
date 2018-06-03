@@ -10,12 +10,14 @@ class Migration(migrations.Migration):
     ]
 
     def move_phone_numbers(apps, schema_editor):
-        for ad in Ad.objects.all():
-            if ad.phone1:
-                AdPhone.objects.create(ad=ad, phone=ad.phone1)
-            if ad.phone2:
-                AdPhone.objects.create(ad=ad, phone=ad.phone2)
-
+        try:
+            for ad in Ad.objects.all():
+                if ad.phone1:
+                    AdPhone.objects.create(ad=ad, phone=ad.phone1)
+                if ad.phone2:
+                    AdPhone.objects.create(ad=ad, phone=ad.phone2)
+        except:
+            pass
 
     operations = [
         migrations.RunPython(move_phone_numbers),
