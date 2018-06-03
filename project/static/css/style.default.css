@@ -3690,3 +3690,23 @@ a > code {
     margin-left: 15px;
   }
 }
+
+
+/********Custom********/
+
+.logo .navbar-brand img{
+  width: 100%;
+}
+
+
+
+@media (max-width: 390px) {
+  .logo{
+    width: 80%;
+  }
+}
+@media (max-width: 280px) {
+  .logo{
+    width: 70%;
+  }
+}

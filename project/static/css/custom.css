@@ -1,7 +1,9 @@
 .lang{
-    position: relative;
     margin-top: 30px;
     padding:0 0 70px 17px;
+}
+.lang .lang-dropdown-wrap{
+    position: relative;
 }
 .btn-flag {
     display: inline-block;
@@ -53,7 +55,7 @@
 
 .lang-dropdown {
     position: absolute;
-    min-width: 155px;
+    min-width: 170px;
     z-index: 2;
     opacity: 0;
     visibility: hidden;

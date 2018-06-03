@@ -37,16 +37,22 @@
   <header class="nav-holder make-sticky">
     <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
       <div class="container">
-          <a href="{% url 'webapp:index' %}" class="navbar-brand home">
-              <img src="{% static 'img/logo.png' %}" alt="Universal logo" class="d-none d-md-inline-block"><img src="{% static 'img/logo.png' %}" alt="{% trans 'Кочкор Реклама' %}" class="d-inline-block d-md-none">
-              <span class="sr-only">{% trans 'Кочкор - перейти на главную cтраницу' %}</span>
-          </a>
+          <div class="logo">
+              <a href="{% url 'webapp:index' %}" class="navbar-brand home">
+                  <img src="{% static 'img/logo.png' %}" alt="Universal logo" class="d-none d-md-inline-block"><img src="{% static 'img/logo.png' %}" alt="{% trans 'Кочкор Реклама' %}" class="d-inline-block d-md-none">
+                  <span class="sr-only">{% trans 'Кочкор - перейти на главную cтраницу' %}</span>
+              </a>
+
+          </div>
         <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
         <div id="navigation" class="navbar-collapse collapse">
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item {% highlight_if_active 'webapp:index' %} "><a href="{% url 'webapp:index' %}" class="dropdown">{% trans 'Главная' %}</a></li>
             <li class="nav-item {% highlight_if_active 'webapp:ad_create' %}"><a href="{% url 'webapp:ad_create' %}" class="dropdown">{% trans 'Создать объявление' %}</a></li>
             <li class="nav-item {% highlight_if_active 'webapp:contact' %}"><a href="{% url 'webapp:contact' %}" class="dropdown">{% trans 'Контакт' %}</a></li>
+            {% if user.is_staff %}
+              <li class="nav-item"><a href="/admin/" class="dropdown">{% trans 'Админ' %}</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
