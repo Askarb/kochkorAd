@@ -73,7 +73,9 @@ class CategoryView(ContextMixin, ListView):
     paginate_by = ADS_PER_PAGE
 
     def get_queryset(self):
-        return Ad.objects.active().filter(category__slug=self.kwargs['category'])
+        category = Category.objects.get(slug=self.kwargs['category'])
+        category.increment_view(self.request)
+        return Ad.objects.active().filter(category=category)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

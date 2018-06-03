@@ -13,9 +13,19 @@ from applications.helpers.utils import generate_slug
 class Category(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=255, verbose_name='Link', unique=True)
+    view_count = models.IntegerField(default=0)
+
+    def increment_view(self, request):
+        if not request.user.is_staff:
+            self.view_count += 1
+            self.save()
+        return self.view_count
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['-view_count']
 
 
 class AdManager(models.Manager):

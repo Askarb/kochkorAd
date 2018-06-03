@@ -10,8 +10,9 @@ def ad_update(modeladmin, request, queryset):
 ad_update.short_description = "Rise selected ads"
 
 
+@admin.register(Category)
 class CategoryAdmin(TabbedTranslationAdmin):
-    list_display = ['pk', 'name', 'name_ru', 'name_ky', 'name_en', 'slug']
+    list_display = ['pk', 'name', 'name_ru', 'name_ky', 'name_en', 'slug', 'view_count']
     list_display_links = ('pk', 'name')
     prepopulated_fields = {"slug": ("name",)}
 
@@ -26,6 +27,7 @@ class AdPhoneInline(admin.TabularInline):
     extra = 3
 
 
+@admin.register(Ad)
 class AdAdmin(admin.ModelAdmin):
 
     actions_on_top = True
@@ -40,6 +42,7 @@ class AdAdmin(admin.ModelAdmin):
     actions = [ad_update]
 
 
+@admin.register(Slider)
 class SliderAdmin(admin.ModelAdmin):
     list_display = ('title', 'active', 'priority')
     list_editable = ('active', 'priority')
@@ -61,8 +64,3 @@ class VariableAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'email', 'phone', 'message')
     list_display_links = ('pk', 'name')
-
-
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Ad, AdAdmin)
-admin.site.register(Slider, SliderAdmin)
