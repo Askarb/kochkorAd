@@ -1,4 +1,5 @@
-//START GOOGLE ANALYTICS
+//START social share
+///Facebook
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -6,7 +7,25 @@
   js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v3.0&appId=605044093212609&autoLogAppEvents=1';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-//END GOOGLE ANALYTICS
+//***************OK
+
+
+!function (d, id, did, st, title, description, image) {
+  var js = d.createElement("script");
+  js.src = "https://connect.ok.ru/connect.js";
+  js.onload = js.onreadystatechange = function () {
+  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+    if (!this.executed) {
+      this.executed = true;
+      setTimeout(function () {
+        OK.CONNECT.insertShareWidget(id,did,st, title, description, image);
+      }, 0);
+    }
+  }};
+  d.documentElement.appendChild(js);
+}(document,"ok_shareWidget",document.URL,'{"sz":30,"st":"rounded","ck":2,"lang":"ru"}',"","","");
+//END social share
+
 //START language
 $(document).ready(function () {
     var body = $('body');
@@ -33,4 +52,5 @@ $(document).ready(function () {
         form.submit();
     });
 
-})//Language language
+})
+//Language language
