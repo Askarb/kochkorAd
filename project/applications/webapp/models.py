@@ -43,6 +43,9 @@ class Ad(models.Model):
     class Meta:
         ordering = ['-date_update']
 
+    def number(self):
+        return ', '.join(_.phone for _ in self.phones.all())
+
     def save(self, force_insert=False, force_update=False, using=None, supdate_fields=None):
         if not self.title:
             self.title = self.text[:20]

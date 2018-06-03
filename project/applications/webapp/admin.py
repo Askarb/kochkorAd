@@ -31,7 +31,7 @@ class AdAdmin(admin.ModelAdmin):
     actions_on_top = True
     save_on_top = True
     list_display = ['title', 'category', 'date_create', 'date_update', 'is_active',
-                    'rise_count', 'view_count']
+                    'rise_count', 'view_count', 'number']
     search_fields = ('title',)
     list_filter = ['is_active', 'category']
     prepopulated_fields = {"slug": ("title",)}
