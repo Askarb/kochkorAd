@@ -3693,6 +3693,9 @@ a > code {
 
 
 /********Custom********/
+.logo {
+  display: inline-block;
+}
 
 .logo .navbar-brand img{
   width: 100%;
@@ -3700,13 +3703,8 @@ a > code {
 
 
 
-@media (max-width: 390px) {
+@media (max-width: 400px) {
   .logo{
-    width: 80%;
-  }
-}
-@media (max-width: 280px) {
-  .logo{
-    width: 70%;
+    width: 60%;
   }
 }
