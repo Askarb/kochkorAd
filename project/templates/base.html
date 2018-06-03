@@ -95,10 +95,11 @@
     <script src="{% static 'js/front.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 
+    {% block js_jq %}{% endblock %}
+
     {% if messages %}
     <script>
         $(document).ready(function () {
-
             {% for message in messages %}
                 {% for message in messages %}
                     $.notify("{{ message }}", {

@@ -39,7 +39,7 @@
                       <h2>{{ object.title }}</h2>
                     </div>
                   {% endif %}
-                  <p>{{ object.text }}</p>
+                  <p>{{ object.text|linebreaks }}</p>
                   <div
                         class="fb-share-button"
                         data-href="{{ request.site_url }}{% url 'webapp:ad' object.slug %}"
@@ -66,10 +66,13 @@
                 <div class="heading">
                   <h3></h3>
                 </div>
-                <h4>{% trans 'Телефон' %}</h4>
-                <p><strong>{{ object.phone1 }}</strong></p>
-                <p><strong>{{ object.phone2 }}</strong></p>
-                {% if object.category %}
+                  {% if object.phones.all %}
+                    <h4>{% trans 'Телефон' %}</h4>
+                      {% for i in object.phones.all %}
+                        <p><strong>{{ i.phone }}</strong></p>
+                      {% endfor %}
+                  {% endif %}
+                  {% if object.category %}
                   <h4>{% trans 'Категория' %}</h4>
                   <p>
                       <a href="{% url 'webapp:category' object.category.slug %}">

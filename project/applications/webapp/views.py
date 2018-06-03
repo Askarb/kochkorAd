@@ -7,7 +7,7 @@ from django.views import View
 from django.views.generic import ListView, CreateView, DetailView
 from django.views.i18n import set_language
 
-from applications.webapp.forms import CreateAdForm, MessageCreateForm
+from applications.webapp.forms import CreateAdForm, MessageCreateForm, AdImageFormset, AdPhoneFormset
 from applications.webapp.models import Category, Ad, AdImage, Slider, Message, Variable
 from applications.helpers.utils import send_notification_to_telegram
 from main.settings import ADS_PER_PAGE
@@ -106,15 +106,40 @@ class CreateAdView(ContextMixin, CreateView):
     model = Ad
     success_message = _('Объявление успешно создана!')
 
+    def get_context_data(self, **kwargs):
+        context = super(CreateAdView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            formset_img = AdImageFormset(self.request.POST, self.request.FILES)
+            formset_phone = AdPhoneFormset(self.request.POST, self.request.FILES)
+        else:
+            formset_img = AdImageFormset()
+            formset_phone = AdPhoneFormset()
+
+        context['formset_img'] = formset_img
+        context['formset_phone'] = formset_phone
+        return context
+
     def form_valid(self, form):
-        form = form.save()
-        for image in self.request.FILES.getlist('images'):
-            AdImage.objects.create(ad=form, image=image).save()
+        context = self.get_context_data()
+        formset_img = context['formset_img']
+        formset_phone = context['formset_phone']
+
+        ad = form.save()
+        if formset_img.is_valid():
+            formset_img.instance = ad
+            formset_img.save()
+
+        if formset_phone.is_valid():
+            formset_phone.instance = ad
+            formset_phone.save()
 
         send_notification_to_telegram(self.request, form)
-
         messages.add_message(self.request, messages.SUCCESS, self.success_message)
-        return HttpResponseRedirect(reverse('webapp:ad', args=(form.slug,)))
+        return HttpResponseRedirect(reverse('webapp:ad', args=(ad.slug,)))
+
+    def form_invalid(self, form):
+        print(form)
+        return super(CreateAdView, self).form_invalid(self.get_context_data())
 
 
 class ContactView(ContextMixin, CreateView):
@@ -131,9 +156,4 @@ class ContactView(ContextMixin, CreateView):
 def change_language(request):
     if not request.POST:
         return redirect('/')
-
-    # if request.user.is_authenticated:
-    #     user = User.objects.db_manager(using='auth').get(id=request.user.profile.account_id)
-    #     user.language = request.POST.get('language', 'en')
-    #     user.save()
     return set_language(request)

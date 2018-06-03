@@ -52,5 +52,14 @@ $(document).ready(function () {
         form.submit();
     });
 
-})
+});
 //Language language
+
+
+$(document).on('click', '.browse', function(){
+    console.log('clicked');
+  var file = $(this).parent().parent().parent().find('.file');file.trigger('click');
+});
+$(document).on('change', '.file', function(){
+  $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+});

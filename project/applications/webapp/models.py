@@ -34,8 +34,6 @@ class Ad(models.Model):
     text = models.TextField(verbose_name='Text')
     date_create = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(null=True, blank=True)
-    phone1 = models.CharField(max_length=20)
-    phone2 = models.CharField(max_length=20, blank=True)
     is_active = models.BooleanField(default=True)
     rise_count = models.IntegerField(default=0)
     view_count = models.IntegerField(default=0)
@@ -82,6 +80,14 @@ class Ad(models.Model):
 class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images', on_delete=models.CASCADE,)
     image = models.ImageField(upload_to=ad_path)
+
+
+class AdPhone(models.Model):
+    ad = models.ForeignKey(Ad, related_name='phones', on_delete=models.CASCADE,)
+    phone = models.CharField(max_length=20)
+
+    # class Meta:
+    #     unique_together = ('ad', 'phone')
 
 
 class Slider(models.Model):

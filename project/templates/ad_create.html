@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n widget_tweaks %}
+{% load i18n widget_tweaks staticfiles %}
 
 {% block content %}
     <div class="container">
@@ -62,16 +62,57 @@
                             {{ form.phone2|add_class:'form-control' }}
                           </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="images">{% trans 'Загрузите фотографии' %}:</label>
-                                {{ form.images|add_class:'form-control' }}
-                            </div>
-                        </div>
+
+
+<!-- start phone formset -->
+<div class="col-sm-12" id="ad_phones">
+    <h3>{% trans "Телефон" %}</h3>
+    {% for form in formset_phone.forms %}
+
+        <div class="col-sm-12 form_phone">
+          <div class="col-9 col-sm-9 col-md-9 form-group" style="display: inline-block">
+            {{ form.phone|add_class:'form-control' }}
+          </div>
+        </div>
+
+        {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+    {% endfor %}
+
+</div>
+
+<!-- start upload image form -->
+<div class="col-sm-12" id="ad_images" style="margin-top: 20px;margin-bottom: ">
+    <h3>{% trans "Загрузка фото" %}</h3>
+
+    {% for form in formset_img.forms %}
+        <div class="row form_images">
+            <div class="col-9 col-sm-9 col-md-9">
+                <div class="form-group">
+                    <input class="file input-file-hidden" type="file" id="{{ form.image.auto_id }}" name="{{ form.image.html_name }}">
+{#                    {{ form.image|add_class:"file input-file-hidden" }}#}
+                    <div class="input-group col-xs-12">
+                        <input type="text"
+                               class="browse form-control input-lg"
+                               placeholder="{% trans 'Загрузить изображения' %}">
+                        <span class="input-group-btn">
+                            <button class="browse btn btn-primary input-lg"
+                                    type="button">{% trans "Загрузить" %}</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+    {% endfor %}
+</div>
+<!-- END upload image form -->
+
                         <div class="col-sm-12 text-center">
                           <button type="submit" class="btn btn-template-outlined"><i class="fa fa-envelope-o"></i> {% trans "Создать объявление" %}</button>
                         </div>
                       </div>
+                        {{ formset_phone.management_form }}
+                        {{ formset_img.management_form }}
                     </form>
                   </div>
                 </div>
@@ -80,4 +121,31 @@
         </div>
       </div>
     </div>
+{% endblock %}
+
+
+
+{% block js_jq %}
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script>
+        $(function () {
+            $('#ad_images div.form_images').formset({
+                prefix: '{{ formset_img.prefix }}',
+                formCssClass: 'dynamic-image-form',
+                addText: '{% trans 'Добавить изображение' %}',
+                deleteText: '{% trans 'Удалить' %}',
+                deleteCssClass: 'delete-row-image'
+            });
+
+            $('#ad_phones div.form_phone').formset({
+                formCssClass: 'dynamic-document-form',
+                prefix: '{{ formset_phone.prefix }}',
+                addText: '{% trans 'Добавить еще номер' %}',
+                deleteText: '{% trans 'Удалить' %}',
+                deleteCssClass: 'delete-row-document',
+                addCssClass: 'add-row-document'
+            })
+        });
+
+    </script>
 {% endblock %}

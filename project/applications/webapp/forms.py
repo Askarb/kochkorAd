@@ -1,23 +1,43 @@
 from django import forms
-from .models import Ad, Message
+from django.utils.translation import gettext_lazy as _
+
+from .models import Ad, Message, AdImage, AdPhone
 
 
 class CreateAdForm(forms.ModelForm):
     images = forms.ImageField(widget=forms.ClearableFileInput(
-        attrs={'value': 'asd', 'multiple': True, 'class': 'form-control',
-                                   }),
+        attrs={'value': 'asd', 'multiple': True, 'class': 'form-control'}),
         required=False)
 
     class Meta:
         model = Ad
-        fields = ('title', 'text', 'category', 'phone1', 'phone2')
+        fields = ('title', 'text', 'category')
 
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Там сатам'}),
-            'text': forms.Textarea(attrs={'placeholder': '5 болмолуу там сатам...'}),
-            'phone1': forms.TextInput(attrs={'placeholder': '0700 123 456'}),
-            'phone2': forms.TextInput(attrs={'placeholder': '0700 123 457'}),
+            'title': forms.TextInput(attrs={'placeholder': _('Там сатам')}),
+            'text': forms.Textarea(attrs={'placeholder': _('5 болмолуу там сатам...')}),
         }
+
+
+class AdImageUploadForm(forms.ModelForm):
+
+    class Meta:
+        model = AdImage
+        fields = ['image', ]
+
+
+class AdPhoneForm(forms.ModelForm):
+
+    class Meta:
+        model = AdPhone
+        fields = ['phone', ]
+        widgets = {
+            'phone': forms.TextInput(attrs={'placeholder': _('Ваш номер телефона')})
+        }
+
+
+AdImageFormset = forms.inlineformset_factory(Ad, AdImage, extra=3, max_num=20, form=AdImageUploadForm)
+AdPhoneFormset = forms.inlineformset_factory(Ad, AdPhone, extra=2, max_num=10, form=AdPhoneForm)
 
 
 class MessageCreateForm(forms.ModelForm):

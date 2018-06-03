@@ -2,7 +2,7 @@ from datetime import datetime
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 
-from .models import Category, Ad, AdImage, Slider, Message, Variable
+from .models import Category, Ad, AdImage, Slider, Message, Variable, AdPhone
 
 
 def ad_update(modeladmin, request, queryset):
@@ -18,19 +18,24 @@ class CategoryAdmin(TabbedTranslationAdmin):
 
 class AdImageInline(admin.TabularInline):
     model = AdImage
-    extra = 1
+    extra = 3
+
+
+class AdPhoneInline(admin.TabularInline):
+    model = AdPhone
+    extra = 3
 
 
 class AdAdmin(admin.ModelAdmin):
 
     actions_on_top = True
     save_on_top = True
-    list_display = ['title', 'category', 'date_create', 'date_update', 'phone1', 'phone2', 'is_active',
+    list_display = ['title', 'category', 'date_create', 'date_update', 'is_active',
                     'rise_count', 'view_count']
-    search_fields = ('title', 'phone1', 'phone2')
+    search_fields = ('title',)
     list_filter = ['is_active', 'category']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [AdImageInline, ]
+    inlines = [AdPhoneInline, AdImageInline, ]
     list_editable = ['is_active']
     actions = [ad_update]
 

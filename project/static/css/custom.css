@@ -191,3 +191,10 @@ ul{
     opacity: 1;
     visibility: visible;
 }
+
+
+
+.input-file-hidden {
+    position: absolute;
+    clip: rect(0px, 0px, 0px, 0px);
+}
