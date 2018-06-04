@@ -135,7 +135,7 @@ class CreateAdView(ContextMixin, CreateView):
             formset_phone.instance = ad
             formset_phone.save()
 
-        send_notification_to_telegram(self.request, form)
+        send_notification_to_telegram(self.request, ad)
         messages.add_message(self.request, messages.SUCCESS, self.success_message)
         return HttpResponseRedirect(reverse('webapp:ad', args=(ad.slug,)))
 
