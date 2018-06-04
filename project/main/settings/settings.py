@@ -2,6 +2,7 @@ import environ
 import os
 
 import django.conf.locale
+import raven
 from django.utils.translation import gettext_lazy as _
 
 
@@ -33,6 +34,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'social_django',
     'django_social_share',
+    'raven.contrib.django.raven_compat',
     
     'applications.webapp',
 ]
@@ -188,3 +190,12 @@ SOCIAL_AUTH_FACEBOOK_SECRET = env('SOCIAL_AUTH_FACEBOOK_SECRET')
 SITE_URL = 'http://kochkorcity.kg'
 
 WHATSAPP_NUMBER = '996772885381'
+
+
+if not DEBUG:
+    RAVEN_CONFIG = {
+        'dsn': 'https://8203f6d43937476d84ee7330dba1a6be:35530b9cdbda468691340b30aa534e54@sentry.io/1218758',
+        # If you are using git, you can also automatically configure the
+        # release based on the git info.
+        'release': raven.fetch_git_sha(str(environ.Path(__file__) - 4)),
+    }

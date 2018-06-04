@@ -140,7 +140,6 @@ class CreateAdView(ContextMixin, CreateView):
         return HttpResponseRedirect(reverse('webapp:ad', args=(ad.slug,)))
 
     def form_invalid(self, form):
-        print(form)
         return super(CreateAdView, self).form_invalid(self.get_context_data())
 
 
