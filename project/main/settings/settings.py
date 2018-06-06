@@ -194,7 +194,7 @@ WHATSAPP_NUMBER = '996772885381'
 
 if not DEBUG:
     RAVEN_CONFIG = {
-        'dsn': 'https://8203f6d43937476d84ee7330dba1a6be:35530b9cdbda468691340b30aa534e54@sentry.io/1218758',
+        'dsn': env('RAVEN_DSN'),
         # If you are using git, you can also automatically configure the
         # release based on the git info.
         'release': raven.fetch_git_sha(str(environ.Path(__file__) - 4)),

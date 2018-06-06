@@ -1,10 +1,10 @@
+import datetime
 from urllib.parse import urljoin
 
 from ckeditor.fields import RichTextField
-from datetime import datetime
 from django.conf import settings
 from django.db import models
-from sorl.thumbnail import get_thumbnail
+from sorl.thumbnail import get_thumbnail, ImageField
 
 from applications.helpers.media_path import ad_path, slider_image_path
 from applications.helpers.utils import generate_slug
@@ -61,7 +61,7 @@ class Ad(models.Model):
             self.title = self.text[:20]
 
         if not self.date_update:
-            self.date_update = datetime.now()
+            self.date_update = datetime.datetime.now()
 
         while True:
             if not self.slug:
@@ -73,7 +73,7 @@ class Ad(models.Model):
 
     def increment_raise(self):
         self.rise_count += 1
-        self.date_create = datetime.now()
+        self.date_update = datetime.datetime.now()
         self.save()
         return self.rise_count
 
@@ -84,15 +84,25 @@ class Ad(models.Model):
 
     def first_image(self):
         img = self.images.first()
-        return get_thumbnail(img.image, '250x195', crop='center', quality=99).url if img else urljoin(settings.STATIC_URL, 'img/no_image.png')
+        return get_thumbnail(img.image, '250x195').url if img else urljoin(settings.STATIC_URL, 'img/no_image.png')
+
+    @classmethod
+    def suggest(cls, pk=0, count=3):
+        date = datetime.datetime.now()-datetime.timedelta(days=10)
+        return Ad.objects.exclude(pk=pk).filter(date_update__gte=date).order_by('?')[:count]
 
     def __str__(self):
         return str(self.title)
 
+    # @classmethod
+    # def random_items(cls):
+    #     item_count = 3
+    #     cls.objects.first()
+
 
 class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images', on_delete=models.CASCADE,)
-    image = models.ImageField(upload_to=ad_path)
+    image = ImageField(upload_to=ad_path)
 
 
 class AdPhone(models.Model):

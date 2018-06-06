@@ -91,8 +91,36 @@
     {% else %}
         {% include '404.html' %}
     {% endif %}
+    <div class="col-lg-12">
+      <!-- Image box with hover-->
+      <div class="heading">
+        <h2>{% trans 'Возможно Вам так же интересно' %}</h2>
+      </div>
+      <div class="row mb-4">
+
+      {% for ad in suggests %}
+        <div class="col-lg-4 col-md-6">
+          <div class="box-image-text">
+            <div class="image text-center">
+              <img src="{{ ad.first_image }}"  alt="Кочкор реклама" class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center">
+                  <a href="{% url 'webapp:ad' ad.slug %}" class="btn btn-template-outlined-white">
+                      <i class="fa fa-chain"> </i> {% trans 'Открыть' %}
+                  </a>
+              </div>
+            </div>
+            <div class="content">
+              <h4><a href="{% url 'webapp:ad' ad.slug %}">{{ ad.title|truncatechars:40 }}</a></h4>
+              <p>{{ ad.text|truncatechars:60 }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      </div>
+    </div>
+
       </div>
     </div>
 </section>
-     <div id="fb-root"></div>
 {% endblock %}

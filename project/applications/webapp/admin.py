@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
+from sorl.thumbnail.admin import AdminImageMixin
 
 from .models import Category, Ad, AdImage, Slider, Message, Variable, AdPhone
 
@@ -17,7 +18,7 @@ class CategoryAdmin(TabbedTranslationAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
-class AdImageInline(admin.TabularInline):
+class AdImageInline(AdminImageMixin, admin.TabularInline):
     model = AdImage
     extra = 3
 
