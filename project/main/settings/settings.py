@@ -121,6 +121,9 @@ LANGUAGES = (
 LANGUAGE_CODE = 'ru'
 
 
+LANGUAGE_COOKIE_NAME = 'language'
+
+
 LOCALE_PATHS = (
     root('locale'),
 )

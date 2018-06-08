@@ -10,7 +10,7 @@ from django.views.i18n import set_language
 from applications.webapp.forms import CreateAdForm, MessageCreateForm, AdImageFormset, AdPhoneFormset
 from applications.webapp.models import Category, Ad, Slider, Message, Variable
 from applications.helpers.utils import send_notification_to_telegram
-from main.settings import ADS_PER_PAGE
+from main.settings import ADS_PER_PAGE, settings
 
 
 class ContextMixin(object):
@@ -162,4 +162,10 @@ class ContactView(ContextMixin, CreateView):
 def change_language(request):
     if not request.POST:
         return redirect('/')
-    return set_language(request)
+    response = set_language(request)
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, request.POST.get('language'))
+    if not request.user.is_staff:
+        var = Variable.objects.get(name='change_language')
+        var.value = int(var.value)+1
+        var.save()
+    return response
