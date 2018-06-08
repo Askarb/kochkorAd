@@ -92,10 +92,7 @@ class RiseAdView(View):
     success_message = _('Объявление успешно поднята!')
 
     def get(self, *args, **kwargs):
-        try:
-            return HttpResponseRedirect(reverse("webapp:ad", args=[Ad.objects.get(pk=kwargs['pk']).slug]))
-        except Ad.DoesNotExist:
-            return HttpResponseRedirect('/')
+        return self.request.META['HTTP_REFERER']
 
     def post(self, *args, **kwargs):
         try:
