@@ -171,7 +171,7 @@ def change_language(request):
 class TrackView(ListView):
     model = Track
     template_name = 'track.html'
-    paginate_by = 100
+    paginate_by = 10000
 
 
 def track_create(request):
