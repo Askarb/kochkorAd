@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -8,7 +8,7 @@ from django.views.generic import ListView, CreateView, DetailView
 from django.views.i18n import set_language
 
 from applications.webapp.forms import CreateAdForm, MessageCreateForm, AdImageFormset, AdPhoneFormset
-from applications.webapp.models import Category, Ad, Slider, Message, Variable
+from applications.webapp.models import Category, Ad, Slider, Message, Variable, Track
 from applications.helpers.utils import send_notification_to_telegram
 from main.settings import ADS_PER_PAGE, settings
 
@@ -18,7 +18,7 @@ class ContextMixin(object):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
-        context['meta'] =[
+        context['meta'] = [
             ['title', Variable.objects.get(name='meta_title').value],
             ['description', Variable.objects.get(name='meta_description').value],
             ['keywords', Variable.objects.get(name='meta_keywords').value],
@@ -166,3 +166,19 @@ def change_language(request):
         var.value = int(var.value)+1
         var.save()
     return response
+
+
+class TrackView(ListView):
+    model = Track
+    template_name = 'track.html'
+    paginate_by = 100
+
+
+def track_create(request):
+    result = 'Fail'
+    if request.POST:
+        text = request.POST.get('text')
+        if text:
+            Track.objects.create(text=text)
+            result = 'success'
+    return JsonResponse({'status': result})

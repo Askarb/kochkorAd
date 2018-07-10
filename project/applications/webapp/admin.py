@@ -3,7 +3,7 @@ from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
-from .models import Category, Ad, AdImage, Slider, Message, Variable, AdPhone
+from .models import Category, Ad, AdImage, Slider, Message, Variable, AdPhone, Track
 
 
 def ad_update(modeladmin, request, queryset):
@@ -65,3 +65,8 @@ class VariableAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'email', 'phone', 'message')
     list_display_links = ('pk', 'name')
+
+
+@admin.register(Track)
+class TrackAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'date', 'text')

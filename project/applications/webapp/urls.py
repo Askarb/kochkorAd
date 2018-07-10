@@ -11,5 +11,7 @@ urlpatterns = (
     re_path('rise/ad/(?P<pk>\d+)/', views.RiseAdView.as_view(), name='rise_ad'),
     path('ad-create/', views.CreateAdView.as_view(), name='ad_create'),
     path('contact/', views.ContactView.as_view(), name='contact'),
+    path('whatsapp/', views.TrackView.as_view(), name='whatsapp'),
+    path('whatsapp-create/', views.track_create, name='track_create'),
 )
 

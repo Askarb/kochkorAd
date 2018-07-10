@@ -143,3 +143,8 @@ class Message(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Track(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
