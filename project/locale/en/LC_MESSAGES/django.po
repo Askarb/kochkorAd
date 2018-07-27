@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-02 00:51+0600\n"
+"POT-Creation-Date: 2018-07-27 20:59+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,8 +72,7 @@ msgid "Маршрут"
 msgstr ""
 
 #: applications/auto/models.py:31 applications/auto/models.py:32
-#: templates/ad.html:66 templates/ad_create.html:55 templates/ad_create.html:61
-#: templates/contact.html:50
+#: templates/ad.html:70 templates/ad_create.html:56 templates/contact.html:50
 msgid "Телефон"
 msgstr "Phone"
 
@@ -89,39 +88,51 @@ msgstr ""
 msgid "Цена"
 msgstr ""
 
-#: applications/webapp/views.py:30
+#: applications/webapp/forms.py:17
+msgid "Там сатам"
+msgstr ""
+
+#: applications/webapp/forms.py:18
+msgid "5 болмолуу там сатам..."
+msgstr ""
+
+#: applications/webapp/forms.py:35
+msgid "Ваш номер телефона"
+msgstr ""
+
+#: applications/webapp/views.py:37
 msgid "Последние объявления"
 msgstr "Latest ads"
 
-#: applications/webapp/views.py:44 templates/sidebar.html:11
+#: applications/webapp/views.py:51 templates/sidebar.html:11
 msgid "Все объявления"
 msgstr "All ads"
 
-#: applications/webapp/views.py:73
+#: applications/webapp/views.py:87
 msgid "Реклама по категориям"
 msgstr "Ad by category"
 
-#: applications/webapp/views.py:78
+#: applications/webapp/views.py:92
 msgid "Объявление успешно поднята!"
 msgstr "Ad successfully raised"
 
-#: applications/webapp/views.py:100
+#: applications/webapp/views.py:111
 msgid "Объявление успешно создана!"
 msgstr "Ad successfully created"
 
-#: applications/webapp/views.py:117
+#: applications/webapp/views.py:152
 msgid "Сообщение успешно отправлено!"
 msgstr "Message successfully sent"
 
-#: main/settings/settings.py:114
+#: main/settings/settings.py:116
 msgid "Russian"
 msgstr ""
 
-#: main/settings/settings.py:115
+#: main/settings/settings.py:117
 msgid "Kyrgyz"
 msgstr ""
 
-#: main/settings/settings.py:116
+#: main/settings/settings.py:118
 msgid "English"
 msgstr ""
 
@@ -137,13 +148,21 @@ msgstr "Error 404 - Page not found"
 msgid "Перейти на главную страницу"
 msgstr "Go to home page"
 
-#: templates/ad.html:58
+#: templates/ad.html:61
 msgid "Поднять объявление"
 msgstr "Rise ad"
 
-#: templates/ad.html:70 templates/ad_create.html:43 templates/category.html:4
+#: templates/ad.html:76 templates/ad_create.html:43 templates/category.html:4
 msgid "Категория"
 msgstr "Category"
+
+#: templates/ad.html:97
+msgid "Возможно Вам так же интересно"
+msgstr ""
+
+#: templates/ad.html:108 templates/items.html:18
+msgid "Открыть"
+msgstr "Open"
 
 #: templates/ad_create.html:15
 #, fuzzy
@@ -171,13 +190,41 @@ msgstr "Title"
 msgid "Текст"
 msgstr "Text"
 
-#: templates/ad_create.html:67
-msgid "Загрузите фотографии"
+#: templates/ad_create.html:72
+#, fuzzy
+#| msgid "Загрузите фотографии"
+msgid "Загрузка фото"
 msgstr "Upload photo"
 
-#: templates/ad_create.html:72 templates/navbar.html:48
+#: templates/ad_create.html:83
+#, fuzzy
+#| msgid "Загрузите фотографии"
+msgid "Загрузить изображения"
+msgstr "Upload photo"
+
+#: templates/ad_create.html:86
+msgid "Загрузить"
+msgstr ""
+
+#: templates/ad_create.html:98 templates/navbar.html:51
 msgid "Создать объявление"
 msgstr "Create ad"
+
+#: templates/ad_create.html:122
+#, fuzzy
+#| msgid "Отправить сообщение"
+msgid "Добавить изображение"
+msgstr "Send message"
+
+#: templates/ad_create.html:123 templates/ad_create.html:131
+msgid "Удалить"
+msgstr ""
+
+#: templates/ad_create.html:130
+#, fuzzy
+#| msgid "Отправить сообщение"
+msgid "Добавить еще номер"
+msgstr "Send message"
 
 #: templates/contact.html:16
 msgid "Мы здесь чтобы вам помочь"
@@ -230,7 +277,7 @@ msgstr ""
 "Advertising site for Kochkor district. Here you can post your ads for free "
 "with photos and without."
 
-#: templates/footer.html:12 templates/navbar.html:49
+#: templates/footer.html:12 templates/navbar.html:52
 msgid "Контакт"
 msgstr "Contact"
 
@@ -256,10 +303,6 @@ msgstr ""
 msgid "Перейти на страницу контактов"
 msgstr "Go to contact page"
 
-#: templates/items.html:18
-msgid "Открыть"
-msgstr "Open"
-
 #: templates/navbar.html:7
 msgid "Свяжитесь с нами"
 msgstr "Contact us"
@@ -268,17 +311,25 @@ msgstr "Contact us"
 msgid "или"
 msgstr "or"
 
-#: templates/navbar.html:41
+#: templates/navbar.html:42
 msgid "Кочкор Реклама"
 msgstr "Kochkor Ad"
 
-#: templates/navbar.html:42
+#: templates/navbar.html:43
 msgid "Кочкор - перейти на главную cтраницу"
 msgstr "Kochkor - go to main page"
 
-#: templates/navbar.html:47
+#: templates/navbar.html:50
 msgid "Главная"
 msgstr "Main"
+
+#: templates/navbar.html:53
+msgid "Кочкор отель"
+msgstr "Hotel"
+
+#: templates/navbar.html:55
+msgid "Админ"
+msgstr ""
 
 #: templates/sidebar.html:6
 msgid "Категории"

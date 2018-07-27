@@ -50,6 +50,7 @@
             <li class="nav-item {% highlight_if_active 'webapp:index' %} "><a href="{% url 'webapp:index' %}" class="dropdown">{% trans 'Главная' %}</a></li>
             <li class="nav-item {% highlight_if_active 'webapp:ad_create' %}"><a href="{% url 'webapp:ad_create' %}" class="dropdown">{% trans 'Создать объявление' %}</a></li>
             <li class="nav-item {% highlight_if_active 'webapp:contact' %}"><a href="{% url 'webapp:contact' %}" class="dropdown">{% trans 'Контакт' %}</a></li>
+            <li class="nav-item"><a href="http://hotel.kochkorcity.kg" target="_blank" class="dropdown">{% trans 'Кочкор отель' %}</a></li>
             {% if user.is_staff %}
               <li class="nav-item"><a href="/admin/" class="dropdown">{% trans 'Админ' %}</a></li>
             {% endif %}
