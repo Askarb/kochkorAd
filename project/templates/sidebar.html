@@ -8,6 +8,9 @@
             <div class="panel-body">
               <ul class="nav nav-pills flex-column text-sm">
                 <li class="nav-item">
+                    <a href="{% url 'store:goods_list' %}" class="nav-link {% highlight_if_active 'store:goods_list' %}">{% trans 'Товары' %}</a>
+                </li>
+                <li class="nav-item">
                     <a href="{% url 'webapp:all_ad' %}" class="nav-link {% highlight_if_active 'webapp:all_ad' %}">{% trans 'Все объявления' %}</a>
                 </li>
                   {% for category in categories %}

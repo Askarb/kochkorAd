@@ -7,6 +7,7 @@ from django.views import View
 from django.views.generic import ListView, CreateView, DetailView
 from django.views.i18n import set_language
 
+from applications.store.models import Goods
 from applications.webapp.forms import CreateAdForm, MessageCreateForm, AdImageFormset, AdPhoneFormset
 from applications.webapp.models import Category, Ad, Slider, Message, Variable, Track
 from applications.helpers.utils import send_notification_to_telegram
@@ -61,7 +62,7 @@ class AdView(ContextMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(AdView, self).get_context_data(**kwargs)
-        context['suggests'] = self.model.suggest(pk=self.get_object().pk)
+        context['suggests'] = Goods.suggest()
         return context
 
     def get(self, request, *args, **kwargs):

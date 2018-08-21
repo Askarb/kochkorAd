@@ -15,3 +15,9 @@ def slider_image_path(instance, filename):
     return 'slider/{0}'.format(filename)
 
 
+def goods_image_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return 'goods/{0}/{1}'.format(instance.goods.id, filename)
+
+

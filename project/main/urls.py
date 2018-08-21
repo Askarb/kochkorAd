@@ -19,5 +19,6 @@ urlpatterns = [
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
-    url(r'^', include('applications.webapp.urls', namespace='webapp'))
+    path('', include('applications.webapp.urls', namespace='webapp')),
+    path('store', include('applications.store.urls', namespace='store'))
 )

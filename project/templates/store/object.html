@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% load i18n social_share staticfiles %}
+{% load i18n staticfiles %}
 
 {% block meta %}
-    <meta property="og:url"                content="{{ request.site_url }}{% url 'webapp:ad' object.slug %}" />
+    <meta property="og:url"                content="{{ request.site_url }}{% url 'store:goods' object.slug %}" />
     <meta property="og:type"               content="article" />
-    <meta property="og:title"              content="{{ object.title }}" />
-    <meta property="og:description"        content="{{ object.text }}" />
+    <meta property="og:title"              content="{{ object.name }}" />
+    <meta property="og:description"        content="{{ object.info_short }}" />
     <meta property="fb:app_id"             content="{{ request.fb_app_id }}" />
     {% if object.images.first %}
         <meta property="og:image" content="http://kochkorcity.kg{{ object.images.first.image.url }}" />
@@ -34,52 +34,45 @@
           <section class="bar">
             <div class="row portfolio-project">
               <div class="col-md-8">
-                  {% if object.title %}
+                  {% if object.name %}
                     <div class="heading">
-                      <h2>{{ object.title }}</h2>
+                      <h2>{{ object.name }}</h2>
                     </div>
                   {% endif %}
-                  <p>{{ object.text|linebreaks }}</p>
+                  <p>{{ object.info|safe }}</p>
                   <div
                         class="fb-share-button"
-                        data-href="{{ request.site_url }}{% url 'webapp:ad' object.slug %}"
+                        data-href="{{ request.site_url }}{% url 'store:goods' object.slug %}"
                         data-layout="button_count"
                         data-size="large"
                         data-mobile-iframe="true">
                     <a target="_blank"
-                       href="https://www.facebook.com/sharer/sharer.php?u={{ request.site_url }}{% url 'webapp:ad' object.slug %}&amp;src=sdkpreparse"
+                       href="https://www.facebook.com/sharer/sharer.php?u={{ request.site_url }}{% url 'store:goods' object.slug %}&amp;src=sdkpreparse"
                        class="fb-xfbml-parse-ignore">Share</a>
                   </div>
                   <div class="fb-like" data-href="https://web.facebook.com/KochkorCITY/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
                   <p>
                       <div id="ok_shareWidget"></div>
                   </p>
-
-                  <p>
-                    <form action="{% url 'webapp:rise_ad' object.pk %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-primary">{% trans 'Поднять объявление' %}</button><br>
-                    </form>
-                  </p>
               </div>
               <div class="col-md-4 project-more">
                 <div class="heading">
                   <h3></h3>
                 </div>
-                  {% if object.phones.all %}
-                    <h4>{% trans 'Телефон' %}</h4>
-                      {% for i in object.phones.all %}
-                        <p><strong>{{ i.phone }}</strong></p>
-                      {% endfor %}
-                  {% endif %}
-                  {% if object.category %}
-                  <h4>{% trans 'Категория' %}</h4>
-                  <p>
-                      <a href="{% url 'webapp:category' object.category.slug %}">
-                          <b>{{ object.category }}</b>
-                      </a>
-                  </p>
-                {% endif %}
+                    <h4>{% trans 'Цена' %}</h4>
+                    <p><strong>{{ object.price }} {% trans 'СОМ' %}</strong></p>
+                  {% if object.store.name %}
+                  <h4>{% trans 'Магазин' %}</h4>
+                      <p><strong>{{ object.store.name }}</strong></p>
+               {% endif %}
+{#                   {% if object.category %}#}
+{#                  <h4>{% trans 'Категория' %}</h4>#}
+{#                  <p>#}
+{#                      <a href="{% url 'webapp:category' object.category.slug %}">#}
+{#                          <b>{{ object.category }}</b>#}
+{#                      </a>#}
+{#                  </p>#}
+{#                {% endif %}#}
 
 
 {#                <h4>Dates</h4>#}
@@ -98,6 +91,7 @@
       </div>
       <div class="row mb-4">
 
+
       {% for object in suggests %}
         <div class="col-lg-4 col-md-6">
           <div class="box-image-text">
@@ -110,7 +104,7 @@
               </div>
             </div>
             <div class="content">
-              <h4><a href="{% url 'store:goods' object.slug %}">{{ objct.name|truncatechars:40 }}</a></h4>
+              <h4><a href="{% url 'store:goods' object.slug %}">{{ object.name|truncatechars:40 }}</a></h4>
               <p>{{ object.info_short|safe }}</p>
             </div>
           </div>
