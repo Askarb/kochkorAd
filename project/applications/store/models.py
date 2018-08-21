@@ -21,6 +21,7 @@ class Store(models.Model):
     slug = models.SlugField()
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     info = RichTextField()
+    phone = models.CharField(max_length=20)
     location = RichTextField()
 
     def __str__(self):
