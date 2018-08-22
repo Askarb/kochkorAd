@@ -20,5 +20,5 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('', include('applications.webapp.urls', namespace='webapp')),
-    path('store', include('applications.store.urls', namespace='store'))
+    path('store/', include('applications.store.urls', namespace='store'))
 )
