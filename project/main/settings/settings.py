@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'applications.store',
     'applications.webapp',
+    'applications.money',
 ]
 
 MIDDLEWARE = [
