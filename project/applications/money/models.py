@@ -36,8 +36,8 @@ class Account(models.Model):
 class Transaction(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     account = models.ForeignKey(Account, on_delete=models.PROTECT)
-    sum = models.IntegerField(default=0)
-    amount = models.IntegerField()
+    sum = models.FloatField(default=0)
+    amount = models.FloatField()
     info = models.TextField(blank=True)
     date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
