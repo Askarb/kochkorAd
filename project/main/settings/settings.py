@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django_social_share',
     'raven.contrib.django.raven_compat',
 
+    'mptt',
+
     'applications.store',
     'applications.webapp',
     'applications.money',

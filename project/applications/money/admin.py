@@ -1,10 +1,11 @@
 from django.contrib import admin
+from mptt.admin import MPTTModelAdmin
 
 from applications.money import models
 
 
 @admin.register(models.Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(MPTTModelAdmin):
     pass
 
 
