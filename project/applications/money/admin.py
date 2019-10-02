@@ -23,3 +23,4 @@ class CurrencyAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('id', 'category', 'account', 'amount', 'sum', 'info', 'date', 'created_at', 'account__sum')
     readonly_fields = ('created_at', )
+    list_filter = ('account', 'category')
