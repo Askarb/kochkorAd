@@ -8,7 +8,7 @@ django-modeltranslation==0.13b1
 django-mptt==0.10.0
 django-social-share==1.1.2
 django-widget-tweaks==1.4.2
-Pillow==4.3.0
+Pillow==6.2.0
 awesome-slugify==1.6.5
 telepot==12.5
 psycopg2-binary==2.7.4
