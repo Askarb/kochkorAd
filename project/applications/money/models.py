@@ -13,6 +13,7 @@ class Category(MPTTModel):
 
 class Currency(models.Model):
     name = models.CharField(max_length=20)
+    val = models.FloatField(default=0)
 
     def __str__(self):
         return self.name
@@ -48,6 +49,9 @@ class Transaction(models.Model):
     @property
     def account__sum(self):
         return self.account.sum
+
+    def in_som(self):
+        return self.amount * self.account.currency.val
 
     def save(self, **kwargs):
         if self.sum == 0:

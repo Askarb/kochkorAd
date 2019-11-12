@@ -16,11 +16,11 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(models.Currency)
 class CurrencyAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'val', 'id')
 
 
 @admin.register(models.Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'category', 'account', 'amount', 'sum', 'info', 'date', 'created_at', 'account__sum')
+    list_display = ('id', 'category', 'account', 'amount', 'sum', 'info', 'date', 'created_at', 'account__sum', 'in_som')
     readonly_fields = ('created_at', )
     list_filter = ('account', 'category')
