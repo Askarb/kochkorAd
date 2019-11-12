@@ -51,7 +51,7 @@ class Transaction(models.Model):
         return self.account.sum
 
     def in_som(self):
-        return self.amount * self.account.currency.val
+        return format(self.amount * self.account.currency.val, ".2f")
 
     def save(self, **kwargs):
         if self.sum == 0:
